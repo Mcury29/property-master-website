@@ -6,7 +6,7 @@ import { Link } from 'wouter';
 const services = [
   {
     icon: Building,
-    title: 'Commercial Real Estate',
+    title: 'Commercial Real Estate Management',
     description: 'Our commercial real estate team connects businesses with professional, well-maintained spaces across Edmonton and Sherwood Park.',
     features: [
       'Office, retail, and mixed-use leasing opportunities',

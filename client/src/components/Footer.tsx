@@ -7,7 +7,7 @@ import ContactModal from '@/components/ContactModal';
 
 const footerSections = {
   services: [
-    { title: 'Commercial Real Estate', url: '/services/commercial-real-estate' },
+    { title: 'Commercial Real Estate Management', url: '/services/commercial-real-estate' },
     { title: 'Maintenance Services', url: '/services/maintenance' },
     { title: 'Grounds Keeping', url: '/services/grounds' },
     { title: 'Property Management', url: '/services/property-management' }

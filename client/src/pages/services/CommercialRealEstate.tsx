@@ -17,7 +17,7 @@ export default function CommercialRealEstate() {
               <div className="bg-primary p-3 rounded-lg">
                 <Building className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold">Commercial Real Estate</h1>
+              <h1 className="text-4xl md:text-5xl font-bold">Commercial Real Estate Management</h1>
             </div>
             <p className="text-xl text-slate-300 max-w-3xl">
               Our commercial real estate team connects businesses with professional, well-maintained spaces 
