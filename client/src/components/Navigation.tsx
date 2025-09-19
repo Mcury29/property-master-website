@@ -12,8 +12,8 @@ import logoImage from '@assets/E282EEC4-B02B-4D23-B1FB-FF01F386B9D2_175825015221
 import ContactModal from '@/components/ContactModal';
 
 const navigationItems = [
-  { title: 'Home', url: '/' },
   { title: 'Founder', url: '/founder' },
+  { title: 'Home', url: '/' },
   { 
     title: 'Our Divisions', 
     url: '/services',
