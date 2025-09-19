@@ -157,12 +157,12 @@ export default function Founder() {
                       <Building className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="text-lg font-semibold text-foreground mb-3">
-                      Building From the Ground Up
+                      Excellence Never Compromised
                     </h3>
                     <p className="text-muted-foreground text-sm">
-                      Denis began with a simple idea: do the work right, do it with integrity, 
-                      and the results will follow. What started with small projects grew into 
-                      a respected company trusted by landlords, tenants, and contractors alike.
+                      Denis believed that quality wasn't negotiable. Every project, every detail, 
+                      every interaction reflected his unwavering commitment to doing things the right way, 
+                      no matter how big or small the task.
                     </p>
                   </CardContent>
                 </Card>
@@ -175,13 +175,12 @@ export default function Founder() {
                       <Heart className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="text-lg font-semibold text-foreground mb-3">
-                      Shaping the Company's Core
+                      Trust Through Transparency
                     </h3>
                     <p className="text-muted-foreground text-sm">
-                      Under Denis' leadership, the company expanded beyond its early beginnings, 
-                      earning a reputation for reliability and care. He instilled values that became 
-                      the backbone of our business: accountability, respect, responsiveness, and a 
-                      commitment to long-term relationships.
+                      Denis built lasting relationships through honest communication and reliable follow-through. 
+                      His approach was simple: say what you'll do, do what you say, and always keep the client's 
+                      best interests at heart.
                     </p>
                   </CardContent>
                 </Card>
@@ -194,12 +193,12 @@ export default function Founder() {
                       <User className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="text-lg font-semibold text-foreground mb-3">
-                      His Enduring Philosophy
+                      Personal Care, Professional Results
                     </h3>
                     <p className="text-muted-foreground text-sm">
-                      For Denis, property management was about responsibility — to clients, to tenants, 
-                      to the community, and to the people working alongside him. His belief that 
-                      "you treat every property as if it were your own" remains the gold standard we uphold.
+                      Denis treated every property as if it were his own family's investment. This personal 
+                      approach to property care created not just satisfied clients, but partnerships that 
+                      lasted decades.
                     </p>
                   </CardContent>
                 </Card>
@@ -267,6 +266,16 @@ export default function Founder() {
                 <p className="text-muted-foreground">
                   Every success we achieve today stands on the foundation he built. Denis' legacy is not only the properties managed, 
                   or the projects completed, but the trust and reputation he established — a legacy that endures and grows with each passing year.
+                </p>
+                
+                <h3 className="text-xl font-semibold text-primary mb-3">
+                  Family Legacy Continues
+                </h3>
+                <p className="text-muted-foreground">
+                  Our company is proud to be family owned and operated, carrying forward the vision and values built by our founder, Denis LePage. 
+                  Today, the business is in the trusted hands of his wife, Carolyn LePage, along with their two daughters, Renée LePage and Nicole Beaudoin. 
+                  Together, they are dedicated to honoring Denis's legacy while continuing to provide the same level of trust, care, and commitment that 
+                  has always defined our work.
                 </p>
               </motion.div>
             </div>
