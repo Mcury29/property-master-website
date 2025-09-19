@@ -3,6 +3,8 @@ import { Badge } from '@/components/ui/badge';
 import { Building, MapPin, Users, TrendingUp, ShoppingBag, Briefcase, Home } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import type { Property } from '@shared/schema';
+import { motion } from 'motion/react';
+import { useScrollAnimation, fadeInUp, staggerContainer, scaleIn, fadeInLeft } from '@/hooks/useScrollAnimation';
 
 // Calculate portfolio stats from real property data
 const calculatePortfolioStats = (properties: Property[]) => {
@@ -30,6 +32,7 @@ const PropertyCategory = ({ title, properties, icon: Icon, count }: {
   icon: any; 
   count: number;
 }) => {
+  const { ref, isInView } = useScrollAnimation();
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat().format(num);
   };
@@ -41,8 +44,14 @@ const PropertyCategory = ({ title, properties, icon: Icon, count }: {
   if (properties.length === 0) return null;
 
   return (
-    <div className="mb-16">
-      <div className="flex items-center gap-3 mb-6">
+    <motion.div 
+      ref={ref}
+      className="mb-16"
+      variants={staggerContainer}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+    >
+      <motion.div className="flex items-center gap-3 mb-6" variants={fadeInLeft}>
         <div className="bg-primary/10 p-2 rounded-lg">
           <Icon className="w-6 h-6 text-primary" />
         </div>
@@ -50,13 +59,14 @@ const PropertyCategory = ({ title, properties, icon: Icon, count }: {
           <h3 className="text-2xl font-bold text-foreground">{title}</h3>
           <p className="text-muted-foreground">{count} {count === 1 ? 'property' : 'properties'}</p>
         </div>
-      </div>
+      </motion.div>
       
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {properties.map((property) => {
           const occupancyRate = parseFloat(getOccupancyRate(property.occupiedSF, property.totalSF));
           return (
-            <Card key={property.id} className="hover-elevate transition-all duration-300" data-testid={`card-property-${property.id}`}>
+            <motion.div key={property.id} variants={scaleIn}>
+              <Card className="hover-elevate transition-all duration-300" data-testid={`card-property-${property.id}`}>
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -102,10 +112,11 @@ const PropertyCategory = ({ title, properties, icon: Icon, count }: {
                 </div>
               </CardContent>
             </Card>
+            </motion.div>
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -114,6 +125,9 @@ export default function PropertyPortfolio() {
   const { data: properties = [], isLoading, isError } = useQuery<Property[]>({
     queryKey: ['/api/properties']
   });
+
+  const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
+  const { ref: statsRef, isInView: statsInView } = useScrollAnimation();
 
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat().format(num);
@@ -124,16 +138,28 @@ export default function PropertyPortfolio() {
   return (
     <section className="py-24 bg-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+        <motion.div 
+          ref={headerRef}
+          className="text-center mb-16"
+          variants={staggerContainer}
+          initial="hidden"
+          animate={headerInView ? "visible" : "hidden"}
+        >
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold text-foreground mb-6"
+            variants={fadeInUp}
+          >
             Property <span className="text-primary">Portfolio</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-12">
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-muted-foreground max-w-3xl mx-auto mb-12"
+            variants={fadeInUp}
+          >
             Our portfolio spans nearly half a million square feet of space across Alberta, 
             from professional offices to retail centres and mixed-use developments. 
             With an occupancy rate of over 94%, we offer proven stability and quality across every property we manage.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Loading State */}
         {isLoading && (
@@ -152,63 +178,77 @@ export default function PropertyPortfolio() {
         {/* Portfolio Stats */}
         {!isLoading && !isError && (
         <>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          <Card className="text-center">
-            <CardHeader className="pb-2">
-              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-2">
-                <Building className="w-6 h-6 text-primary" />
-              </div>
-              <CardTitle className="text-2xl font-bold text-primary">
-                {formatNumber(calculatePortfolioStats(properties).totalSF)}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">Total Square Feet</p>
-            </CardContent>
-          </Card>
+        <motion.div 
+          ref={statsRef}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+          variants={staggerContainer}
+          initial="hidden"
+          animate={statsInView ? "visible" : "hidden"}
+        >
+          <motion.div variants={scaleIn}>
+            <Card className="text-center">
+              <CardHeader className="pb-2">
+                <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-2">
+                  <Building className="w-6 h-6 text-primary" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-primary">
+                  {formatNumber(calculatePortfolioStats(properties).totalSF)}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">Total Square Feet</p>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-          <Card className="text-center">
-            <CardHeader className="pb-2">
-              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-2">
-                <Users className="w-6 h-6 text-primary" />
-              </div>
-              <CardTitle className="text-2xl font-bold text-primary">
-                {formatNumber(calculatePortfolioStats(properties).occupiedSF)}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">Occupied Sq Ft</p>
-            </CardContent>
-          </Card>
+          <motion.div variants={scaleIn}>
+            <Card className="text-center">
+              <CardHeader className="pb-2">
+                <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-2">
+                  <Users className="w-6 h-6 text-primary" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-primary">
+                  {formatNumber(calculatePortfolioStats(properties).occupiedSF)}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">Occupied Sq Ft</p>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-          <Card className="text-center">
-            <CardHeader className="pb-2">
-              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-2">
-                <MapPin className="w-6 h-6 text-primary" />
-              </div>
-              <CardTitle className="text-2xl font-bold text-primary">
-                {formatNumber(calculatePortfolioStats(properties).vacantSF)}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">Available Sq Ft</p>
-            </CardContent>
-          </Card>
+          <motion.div variants={scaleIn}>
+            <Card className="text-center">
+              <CardHeader className="pb-2">
+                <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-2">
+                  <MapPin className="w-6 h-6 text-primary" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-primary">
+                  {formatNumber(calculatePortfolioStats(properties).vacantSF)}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">Available Sq Ft</p>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-          <Card className="text-center">
-            <CardHeader className="pb-2">
-              <div className="mx-auto w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-2">
-                <TrendingUp className="w-6 h-6 text-green-500" />
-              </div>
-              <CardTitle className="text-2xl font-bold text-green-500">
-                {calculatePortfolioStats(properties).occupancyRate}%
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">Occupancy Rate</p>
-            </CardContent>
-          </Card>
-        </div>
+          <motion.div variants={scaleIn}>
+            <Card className="text-center">
+              <CardHeader className="pb-2">
+                <div className="mx-auto w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-2">
+                  <TrendingUp className="w-6 h-6 text-green-500" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-green-500">
+                  {calculatePortfolioStats(properties).occupancyRate}%
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">Occupancy Rate</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </motion.div>
 
         {/* Categorized Properties */}
         <PropertyCategory 
