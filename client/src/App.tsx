@@ -9,6 +9,7 @@ import Home from "@/pages/Home";
 import Services from "@/pages/Services";
 import Properties from "@/pages/Properties";
 import Contact from "@/pages/Contact";
+import Founder from "@/pages/Founder";
 import CommercialRealEstate from "@/pages/services/CommercialRealEstate";
 import Maintenance from "@/pages/services/Maintenance";
 import Grounds from "@/pages/services/Grounds";
@@ -18,6 +19,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/founder" component={Founder} />
       <Route path="/services" component={Services} />
       <Route path="/services/commercial-real-estate" component={CommercialRealEstate} />
       <Route path="/services/maintenance" component={Maintenance} />

@@ -13,6 +13,7 @@ import ContactModal from '@/components/ContactModal';
 
 const navigationItems = [
   { title: 'Home', url: '/' },
+  { title: 'Founder', url: '/founder' },
   { 
     title: 'Our Divisions', 
     url: '/services',
