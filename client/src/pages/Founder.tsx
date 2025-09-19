@@ -25,7 +25,7 @@ export default function Founder() {
       metaDescription.setAttribute('name', 'description');
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute('content', 'Learn about Denis LePage, founder of Property Masters Group. A legacy of vision and integrity in commercial property management across Edmonton and Sherwood Park.');
+    metaDescription.setAttribute('content', 'Learn about Denis LePage, founder of Property Masters Group. A legacy of vision and integrity in commercial property management across Edmonton and surrounding area.');
 
     // Create or update Open Graph tags
     let ogTitle = document.querySelector('meta[property="og:title"]');
@@ -300,7 +300,7 @@ export default function Founder() {
               variants={fadeInUp}
             >
               Built on Denis LePage's foundation of integrity, quality, and trust, we continue to serve 
-              the Edmonton and Sherwood Park communities with the same dedication that started it all.
+              the Edmonton and surrounding area communities with the same dedication that started it all.
             </motion.p>
             <motion.div variants={scaleIn}>
               <Button 

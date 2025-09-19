@@ -8,8 +8,8 @@ import { useScrollAnimation, fadeInUp, staggerContainer, scaleIn } from '@/hooks
 const services = [
   {
     icon: Building,
-    title: 'Commercial Real Estate Management',
-    description: 'Our commercial real estate team connects businesses with professional, well-maintained spaces across Edmonton and Sherwood Park.',
+    title: 'Commercial Property Management',
+    description: 'Our commercial real estate team connects businesses with professional, well-maintained spaces across Edmonton and surrounding area.',
     features: [
       'Office, retail, and mixed-use leasing opportunities',
       'Local market expertise for smarter decisions',

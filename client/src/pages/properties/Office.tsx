@@ -104,7 +104,7 @@ export default function Office() {
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3">Prime Locations</h3>
                 <p className="text-muted-foreground">
-                  Strategic locations in Edmonton and Sherwood Park with excellent 
+                  Strategic locations in Edmonton and surrounding area with excellent 
                   accessibility and professional business environments.
                 </p>
               </div>

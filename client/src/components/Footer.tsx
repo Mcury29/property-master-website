@@ -7,7 +7,7 @@ import ContactModal from '@/components/ContactModal';
 
 const footerSections = {
   services: [
-    { title: 'Commercial Real Estate Management', url: '/services/commercial-real-estate' },
+    { title: 'Commercial Property Management', url: '/services/commercial-real-estate' },
     { title: 'Maintenance Services', url: '/services/maintenance' },
     { title: 'Grounds Keeping', url: '/services/grounds' },
     { title: 'Property Management', url: '/services/property-management' }
@@ -44,7 +44,7 @@ export default function Footer() {
               
               <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
                 For over 25 years, Property Masters Group has been the trusted partner for property owners 
-                across Edmonton and Sherwood Park, providing integrated solutions for commercial real estate, 
+                across Edmonton and surrounding area, providing integrated solutions for commercial real estate, 
                 maintenance, and grounds care.
               </p>
               

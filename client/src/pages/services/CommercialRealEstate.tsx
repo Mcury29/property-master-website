@@ -35,11 +35,11 @@ export default function CommercialRealEstate() {
               <div className="bg-primary p-3 rounded-lg">
                 <Building className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold">Commercial Real Estate Management</h1>
+              <h1 className="text-4xl md:text-5xl font-bold">Commercial Property Management</h1>
             </motion.div>
             <motion.p className="text-xl text-slate-300 max-w-3xl mb-8" variants={fadeInLeft}>
               Our commercial real estate team connects businesses with professional, well-maintained spaces 
-              across Edmonton and Sherwood Park. With over 25 years of local market expertise, we help you 
+              across Edmonton and surrounding area. With over 25 years of local market expertise, we help you 
               find the perfect location for your business needs.
             </motion.p>
             <motion.div className="flex flex-col sm:flex-row gap-4" variants={fadeInLeft}>
@@ -201,7 +201,7 @@ export default function CommercialRealEstate() {
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3">Local Market Authority</h3>
                 <p className="text-muted-foreground">
-                  Unmatched knowledge of Edmonton and Sherwood Park commercial markets, including 
+                  Unmatched knowledge of Edmonton and surrounding area commercial markets, including 
                   traffic patterns, zoning regulations, and emerging growth corridors.
                 </p>
               </motion.div>
