@@ -20,6 +20,7 @@ const footerSections = {
   ],
   company: [
     { title: 'Our Divisions', url: '/services' },
+    { title: 'Founders', url: '/founders' },
     { title: 'Contact Us', url: '/contact' },
     { title: 'Privacy Policy', url: '/privacy' }
   ]
