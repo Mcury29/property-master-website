@@ -1,31 +1,91 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Trees, Snowflake, Sun, Droplets, CheckCircle } from 'lucide-react';
+import { Trees, Snowflake, Sun, Droplets, CheckCircle, Sprout, Award, Calendar } from 'lucide-react';
+import { motion } from 'motion/react';
+import { useScrollAnimation, fadeInUp, fadeInLeft, fadeInRight, staggerContainer, scaleIn } from '@/hooks/useScrollAnimation';
 import ContactModal from '@/components/ContactModal';
+import groundsImage1 from '@assets/stock_images/professional_landsca_49943dbf.jpg';
+import groundsImage2 from '@assets/stock_images/professional_landsca_3b5047ec.jpg';
 
 export default function Grounds() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
+  const { ref: heroRef, isInView: heroInView } = useScrollAnimation();
+  const { ref: imageRef, isInView: imageInView } = useScrollAnimation();
+  const { ref: servicesRef, isInView: servicesInView } = useScrollAnimation();
+  const { ref: whyChooseRef, isInView: whyChooseInView } = useScrollAnimation();
+  const { ref: ctaRef, isInView: ctaInView } = useScrollAnimation();
 
   return (
     <>
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
         <div className="bg-slate-900 text-white py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-4 mb-6">
+          <motion.div 
+            ref={heroRef}
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+            variants={staggerContainer}
+            initial="hidden"
+            animate={heroInView ? "visible" : "hidden"}
+          >
+            <motion.div className="flex items-center gap-4 mb-6" variants={fadeInLeft}>
               <div className="bg-primary p-3 rounded-lg">
                 <Trees className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold">Grounds Keeping</h1>
-            </div>
-            <p className="text-xl text-slate-300 max-w-3xl">
-              Our grounds division ensures properties are safe, sharp, and welcoming throughout the year. 
+              <h1 className="text-4xl md:text-5xl font-bold">Professional Grounds Keeping</h1>
+            </motion.div>
+            <motion.p className="text-xl text-slate-300 max-w-3xl mb-8" variants={fadeInLeft}>
+              Our grounds division ensures properties are safe, beautiful, and welcoming throughout the year. 
               From seasonal landscaping to snow removal, we maintain outdoor spaces that enhance 
-              your property's curb appeal and create positive first impressions.
-            </p>
-          </div>
+              your property's curb appeal and create lasting positive first impressions.
+            </motion.p>
+            <motion.div className="flex flex-col sm:flex-row gap-4" variants={fadeInLeft}>
+              <Button 
+                size="lg"
+                onClick={() => setContactModalOpen(true)}
+                data-testid="button-get-started-grounds"
+              >
+                Enhance Your Grounds
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white/20 text-white hover:bg-white/10"
+                data-testid="button-seasonal-grounds"
+              >
+                Seasonal Services
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
+
+        {/* Hero Image Section */}
+        <motion.section 
+          ref={imageRef}
+          className="py-16 bg-slate-50"
+          variants={fadeInUp}
+          initial="hidden"
+          animate={imageInView ? "visible" : "hidden"}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="rounded-lg overflow-hidden">
+                <img 
+                  src={groundsImage1}
+                  alt="Professional Landscaping and Grounds Keeping Services"
+                  className="w-full h-64 lg:h-80 object-cover"
+                />
+              </div>
+              <div className="rounded-lg overflow-hidden">
+                <img 
+                  src={groundsImage2}
+                  alt="Commercial Property Grounds Maintenance"
+                  className="w-full h-64 lg:h-80 object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </motion.section>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {/* Seasonal Services */}
