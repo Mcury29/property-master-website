@@ -53,7 +53,9 @@ export default function Navigation() {
           </div>
 
           <div className="hidden md:block">
-            <Button data-testid="button-request-quote">Request a Quote</Button>
+            <Button asChild data-testid="button-request-quote">
+              <Link href="/contact">Request a Quote</Link>
+            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -93,8 +95,8 @@ export default function Navigation() {
               );
             })}
             <div className="pt-2">
-              <Button className="w-full" data-testid="button-mobile-request-quote">
-                Request a Quote
+              <Button asChild className="w-full" data-testid="button-mobile-request-quote">
+                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>Request a Quote</Link>
               </Button>
             </div>
           </div>
