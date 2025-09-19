@@ -236,7 +236,7 @@ export default function CommercialRealEstate() {
             initial="hidden"
             animate={processInView ? "visible" : "hidden"}
           >
-            <motion.h2 className="text-3xl font-bold text-foreground mb-4" variants={fadeInUp}>
+            <motion.h2 className="text-3xl font-bold text-slate-900 mb-4" variants={fadeInUp}>
               Our Proven Process
             </motion.h2>
             <motion.p className="text-lg text-slate-600 mb-8" variants={fadeInUp}>
