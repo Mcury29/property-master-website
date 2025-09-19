@@ -1,0 +1,205 @@
+You are a professional web developer tasked with creating a complete, modern, responsive website for Property Masters Group of Companies based in Sherwood Park, Alberta. Follow these detailed specifications.
+
+⸻
+
+1. Company Profile
+	•	Business: Full-service commercial real estate, property maintenance, and grounds keeping serving Edmonton & surrounding region.
+	•	Slogan: “We treat your properties like our homes.”
+	•	Experience: Over 25 years.
+	•	Tone: Approachable yet professional, trustworthy, community-oriented.
+	•	Branding: Teal and black primary colors with white space and silver/gray accents.
+	•	Typography: Modern sans-serif (Montserrat, Open Sans).
+	•	Imagery: Polished commercial buildings, maintained landscapes, friendly service team photos.
+
+⸻
+
+2. Navigation
+	•	Home
+	•	Our Services
+	•	Commercial Real Estate
+	•	Maintenance Services
+	•	Grounds Keeping
+	•	About Us
+	•	Properties
+	•	Office & Professional
+	•	Strip Centres
+	•	Residential & Mixed-Use
+	•	Portfolio
+	•	Contact Us
+(Also include “Divisions” pages for Property Management, Grounds, and Maintenance.)
+
+⸻
+
+3. Page Content
+
+Home Page
+
+Hero Headline:
+“Your Property, Our Priority — 25+ Years of Care & Expertise”
+
+Subtext:
+From commercial real estate to building upkeep and grounds maintenance, we deliver trusted solutions that protect and grow your property’s value.
+
+CTAs: View Properties | Explore Our Services
+
+Intro Section:
+For over two decades, Property Masters Group of Companies has been the go-to partner for property owners across Edmonton and Sherwood Park. Locally owned and family-rooted, we combine professionalism with hands-on care. Our clients trust us to manage, maintain, and enhance properties with the same attention we give our own homes.
+
+Testimonial Placeholder:
+“Property Masters treats our building like it’s their own — reliable, responsive, and always professional.”
+
+⸻
+
+About Us
+
+Property Masters Group of Companies was built on one guiding principle: treat every property like home. With more than 25 years in commercial real estate, maintenance, and grounds keeping, we’ve developed a reputation for reliability, quality, and community connection.
+
+Our team takes pride in providing integrated solutions that simplify property ownership. Whether it’s managing tenants, keeping grounds safe year-round, or maintaining building systems, we make it seamless, so you can focus on your business.
+
+⸻
+
+Our Services
+
+Commercial Real Estate
+Our commercial real estate team connects businesses with professional, well-maintained spaces across Edmonton and Sherwood Park.
+	•	Office, retail, and mixed-use leasing opportunities
+	•	Local market expertise for smarter decisions
+	•	Professional property marketing and showcasing
+	•	Guidance through the full leasing process
+
+Maintenance Services
+We keep buildings performing at their best through proactive and reliable care.
+	•	Painting, signage, and tenant improvements
+	•	Interior and exterior repair solutions
+	•	Plumbing & quarterly HVAC preventative maintenance
+	•	Window washing and ongoing building upkeep
+
+Grounds Keeping
+Our grounds division ensures properties are safe, sharp, and welcoming throughout the year.
+	•	Turf care and seasonal landscaping
+	•	Snow removal and ice control
+	•	Parking lot clearing and upkeep
+	•	Site detailing and litter management
+
+⸻
+
+Divisions
+
+Property Management Division
+Full-service property management including rent collection, financial reporting, capital upgrades, and tenant coordination. We protect your investment while ensuring smooth operations and strong asset performance.
+
+Grounds Division
+Comprehensive outdoor care: turf, landscaping, snow removal, ice control, litter pickup, and site detailing. We keep properties safe, functional, and visually appealing in every season.
+
+Maintenance Division
+Reliable building care from top to bottom. We handle painting, signage, repairs, tenant improvements, window washing, and preventative upkeep to extend the life and value of your buildings.
+
+⸻
+
+Properties Section
+
+Intro Copy:
+With a diverse portfolio of professional offices, strip centres, and residential developments, Property Masters connects businesses and communities to the right spaces.
+
+Office & Professional Properties
+	•	Subheading: Premier office spaces in Edmonton & Sherwood Park
+	•	Summary: Over 60,000 ft² of modern, professional workspace across four buildings, ideal for growing businesses.
+	•	CTA: Explore Office Properties
+
+Strip Centre Properties
+	•	Subheading: Diverse strip-centre spaces across Edmonton & Sherwood Park
+	•	Summary: Twelve centres totaling nearly 390,000 ft², home to retail, restaurant, child-care, and wellness tenants.
+	•	CTA: View Strip Centre Properties
+
+Residential & Mixed-Use Properties
+	•	Subheading: Developments blending comfort and convenience
+	•	Summary: Residential and mixed-use properties designed to balance community living with functional commercial access.
+	•	CTA: Discover Residential Properties
+
+⸻
+
+Property Portfolio Page
+
+Intro Copy:
+Our portfolio spans nearly half a million square feet of space across Alberta, from professional offices to retail centres and mixed-use developments. With an occupancy rate of over 94%, we offer proven stability and quality across every property we manage.
+
+Portfolio Totals:
+	•	Total SF: 489,269
+	•	Vacant SF: 28,563
+	•	Occupied SF: 460,706
+	•	Occupancy Rate: 94.2%
+
+Properties (display as cards with Name, Address, Total SF, Vacant SF, Occupied SF):
+	•	Argyll Shopping Centre — 24,508 sf (2,993 vacant, 21,515 occupied)
+	•	Brentwood Building — 21,706 sf (5,285 vacant, 16,421 occupied)
+	•	Normed Professional Centre — 13,160 sf (4,766 vacant, 8,394 occupied)
+	•	Broadmoor Baseline Crossing — 55,358 sf (4,832 vacant, 50,526 occupied)
+	•	Castledowns Shopping Centre — 60,173 sf (0 vacant)
+	•	Centre 34 — 20,165 sf (0 vacant)
+	•	Hans Professional Centre — 28,715 sf (0 vacant)
+	•	Hinton Land — 5,481 sf (0 vacant)
+	•	AHS Project — 11,690 sf (0 vacant)
+	•	No Frills — 37,562 sf (0 vacant)
+	•	Millwoods Mainstreet — 39,194 sf (0 vacant)
+	•	Natasha Manor — 3,517 sf (1,200 vacant, 2,317 occupied)
+	•	Plaza 127 & Warehouse 127 — 20,661 sf (2,125 vacant, 18,536 occupied)
+	•	Sherwood Park Plaza — 44,180 sf (0 vacant)
+	•	Soper Building — 20,033 sf (0 vacant)
+	•	Wainwright Crossing — 11,249 sf (0 vacant)
+	•	Wild Rose Square — 20,693 sf (0 vacant)
+	•	Winnington Building — 10,289 sf (3,945 vacant, 6,344 occupied)
+	•	Woodbridge Gardens — 18,058 sf (0 vacant)
+	•	Ever @ Ellerslie — 22,877 sf (3,417 vacant, 19,460 occupied)
+
+Display Instructions:
+	•	Show portfolio totals at top.
+	•	Grid layout for properties.
+	•	Do not show tenant details.
+	•	Consistent image placeholders and responsive design.
+
+⸻
+
+Contact Us
+
+Intro Copy:
+We’re ready to help — whether you’re searching for space, need maintenance, or want grounds care you can trust. Connect with us today.
+
+Contact Info:
+	•	Address: 152 Sioux Road, Sherwood Park, AB
+	•	Phone: 780-464-1518
+	•	Emails: information@propertymasters.ca, nbeaudoin@propertymasters.ca, rlepage@propertymasters.ca
+
+CTAs: Request a Quote | Book a Meeting | Contact Us
+
+Form: Name, Email, Phone, Message, Consent checkbox.
+
+⸻
+
+Why Choose Us
+	•	Locally owned and community-driven
+	•	Integrated services: real estate, maintenance, and grounds care under one roof
+	•	Proven track record across commercial and residential sectors
+	•	25+ years of trusted experience and long-term client relationships
+
+⸻
+
+4. Functional & Design Requirements
+	•	Fully responsive (mobile/tablet/desktop).
+	•	Consistent teal/black branding with modern typography.
+	•	Easy-to-update property portfolio.
+	•	Automated inquiry form linked to email.
+	•	Accessibility (WCAG AA compliant).
+	•	SEO-ready.
+	•	Performance-optimized with lazy-loaded images.
+
+⸻
+
+5. Deliverables
+	•	Complete website with all specified pages and polished copy.
+	•	Integrated property portfolio using the dataset above.
+	•	Instructions for updating portfolio data.
+	•	Ready-to-use, client-facing site.
+
+⸻
+
+Final Instruction to Agent: Build this website exactly as described. Include all enhanced page copy, navigation, and property portfolio data. Deliver a responsive, modern, polished site for Property Masters Group of Companies.
