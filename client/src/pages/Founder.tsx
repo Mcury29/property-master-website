@@ -86,9 +86,9 @@ export default function Founder() {
                     variant="outline" 
                     size="lg"
                     onClick={scrollToStory}
-                    data-testid="button-our-story"
+                    data-testid="button-his-story"
                   >
-                    Our Story
+                    His Story
                   </Button>
                 </div>
               </div>
@@ -169,9 +169,9 @@ export default function Founder() {
             </div>
           </section>
 
-          {/* Our Story Section */}
+          {/* His Story Section */}
           <section id="our-story" className="mb-16">
-            <h2 className="text-3xl font-bold text-foreground mb-8">Our Story</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-8">His Story</h2>
             <div className="grid lg:grid-cols-2 gap-12">
               <div className="space-y-6">
                 <h3 className="text-xl font-semibold text-primary mb-3">
