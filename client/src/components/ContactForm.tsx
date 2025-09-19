@@ -6,26 +6,83 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { useMutation } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
+import type { InsertContactInquiry } from '@shared/schema';
 
 export default function ContactForm() {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     message: '',
+    inquiryType: 'general',
     consent: false
+  });
+
+  const submitContactMutation = useMutation({
+    mutationFn: async (data: InsertContactInquiry) => {
+      try {
+        const response = await apiRequest('POST', '/api/contact-inquiries', data);
+        const result = await response.json();
+        return result;
+      } catch (error) {
+        console.error('Contact form submission failed');
+        throw error;
+      }
+    },
+    onSuccess: () => {
+      toast({
+        title: "Message sent!",
+        description: "Thank you for your inquiry. We'll get back to you within 24 hours."
+      });
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: '',
+        inquiryType: 'general',
+        consent: false
+      });
+    },
+    onError: (error: any) => {
+      console.error('Contact form submission error');
+      toast({
+        title: "Error",
+        description: error?.message || "Failed to send message. Please try again.",
+        variant: "destructive"
+      });
+    }
   });
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    console.log(`${field} updated:`, value);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // todo: remove mock functionality
-    alert('Thank you for your inquiry! We will contact you soon.');
+    
+    if (!formData.consent) {
+      toast({
+        title: "Consent required",
+        description: "Please agree to be contacted before submitting your inquiry.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Submit the form data
+    submitContactMutation.mutate({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone || null,
+      message: formData.message,
+      inquiryType: formData.inquiryType,
+      consent: formData.consent
+    });
   };
 
   return (
@@ -191,10 +248,10 @@ export default function ContactForm() {
                       type="submit" 
                       size="lg" 
                       className="flex-1"
-                      disabled={!formData.consent}
+                      disabled={!formData.consent || submitContactMutation.isPending}
                       data-testid="button-submit-contact"
                     >
-                      Send Message
+                      {submitContactMutation.isPending ? 'Sending...' : 'Send Message'}
                     </Button>
                     <Button 
                       type="button" 

@@ -1,31 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Building, MapPin, Users, TrendingUp } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import type { Property } from '@shared/schema';
 
-const portfolioStats = {
-  totalSF: 489269,
-  vacantSF: 28563,
-  occupiedSF: 460706,
-  occupancyRate: 94.2
+// Calculate portfolio stats from real property data
+const calculatePortfolioStats = (properties: Property[]) => {
+  const totalSF = properties.reduce((sum, prop) => sum + prop.totalSF, 0);
+  const occupiedSF = properties.reduce((sum, prop) => sum + prop.occupiedSF, 0);
+  const vacantSF = properties.reduce((sum, prop) => sum + prop.vacantSF, 0);
+  const occupancyRate = totalSF > 0 ? parseFloat(((occupiedSF / totalSF) * 100).toFixed(1)) : 0;
+  
+  return { totalSF, occupiedSF, vacantSF, occupancyRate };
 };
 
-//todo: remove mock functionality
-const properties = [
-  { name: 'Argyll Shopping Centre', address: 'Edmonton, AB', totalSF: 24508, vacantSF: 2993, occupiedSF: 21515 },
-  { name: 'Brentwood Building', address: 'Edmonton, AB', totalSF: 21706, vacantSF: 5285, occupiedSF: 16421 },
-  { name: 'Normed Professional Centre', address: 'Edmonton, AB', totalSF: 13160, vacantSF: 4766, occupiedSF: 8394 },
-  { name: 'Broadmoor Baseline Crossing', address: 'Sherwood Park, AB', totalSF: 55358, vacantSF: 4832, occupiedSF: 50526 },
-  { name: 'Castledowns Shopping Centre', address: 'Edmonton, AB', totalSF: 60173, vacantSF: 0, occupiedSF: 60173 },
-  { name: 'Centre 34', address: 'Edmonton, AB', totalSF: 20165, vacantSF: 0, occupiedSF: 20165 },
-  { name: 'Hans Professional Centre', address: 'Edmonton, AB', totalSF: 28715, vacantSF: 0, occupiedSF: 28715 },
-  { name: 'Hinton Land', address: 'Hinton, AB', totalSF: 5481, vacantSF: 0, occupiedSF: 5481 },
-  { name: 'AHS Project', address: 'Alberta', totalSF: 11690, vacantSF: 0, occupiedSF: 11690 },
-  { name: 'No Frills', address: 'Edmonton, AB', totalSF: 37562, vacantSF: 0, occupiedSF: 37562 },
-  { name: 'Millwoods Mainstreet', address: 'Edmonton, AB', totalSF: 39194, vacantSF: 0, occupiedSF: 39194 },
-  { name: 'Natasha Manor', address: 'Edmonton, AB', totalSF: 3517, vacantSF: 1200, occupiedSF: 2317 }
-];
-
 export default function PropertyPortfolio() {
+  // Fetch properties from API
+  const { data: properties = [], isLoading, isError } = useQuery<Property[]>({
+    queryKey: ['/api/properties']
+  });
+
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat().format(num);
   };
@@ -55,7 +49,23 @@ export default function PropertyPortfolio() {
           </p>
         </div>
 
+        {/* Loading State */}
+        {isLoading && (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Loading portfolio data...</p>
+          </div>
+        )}
+        
+        {/* Error State */}
+        {isError && (
+          <div className="text-center py-12">
+            <p className="text-red-500">Failed to load portfolio data. Please try again later.</p>
+          </div>
+        )}
+        
         {/* Portfolio Stats */}
+        {!isLoading && !isError && (
+        <>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           <Card className="text-center">
             <CardHeader className="pb-2">
@@ -63,7 +73,7 @@ export default function PropertyPortfolio() {
                 <Building className="w-6 h-6 text-primary" />
               </div>
               <CardTitle className="text-2xl font-bold text-primary">
-                {formatNumber(portfolioStats.totalSF)}
+                {formatNumber(calculatePortfolioStats(properties).totalSF)}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -77,7 +87,7 @@ export default function PropertyPortfolio() {
                 <Users className="w-6 h-6 text-primary" />
               </div>
               <CardTitle className="text-2xl font-bold text-primary">
-                {formatNumber(portfolioStats.occupiedSF)}
+                {formatNumber(calculatePortfolioStats(properties).occupiedSF)}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -91,7 +101,7 @@ export default function PropertyPortfolio() {
                 <MapPin className="w-6 h-6 text-primary" />
               </div>
               <CardTitle className="text-2xl font-bold text-primary">
-                {formatNumber(portfolioStats.vacantSF)}
+                {formatNumber(calculatePortfolioStats(properties).vacantSF)}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -105,7 +115,7 @@ export default function PropertyPortfolio() {
                 <TrendingUp className="w-6 h-6 text-green-500" />
               </div>
               <CardTitle className="text-2xl font-bold text-green-500">
-                {portfolioStats.occupancyRate}%
+                {calculatePortfolioStats(properties).occupancyRate}%
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -116,10 +126,10 @@ export default function PropertyPortfolio() {
 
         {/* Properties Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {properties.map((property, index) => {
+          {properties.map((property) => {
             const occupancyRate = parseFloat(getOccupancyRate(property.occupiedSF, property.totalSF));
             return (
-              <Card key={index} className="hover-elevate transition-all duration-300" data-testid={`card-property-${index}`}>
+              <Card key={property.id} className="hover-elevate transition-all duration-300" data-testid={`card-property-${property.id}`}>
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -134,7 +144,7 @@ export default function PropertyPortfolio() {
                     <Badge 
                       variant={occupancyRate === 100 ? 'default' : occupancyRate >= 90 ? 'secondary' : 'destructive'}
                       className="ml-2"
-                      data-testid={`badge-occupancy-${index}`}
+                      data-testid={`badge-occupancy-${property.id}`}
                     >
                       {occupancyRate}% Occupied
                     </Badge>
@@ -144,20 +154,20 @@ export default function PropertyPortfolio() {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-muted-foreground">Total:</span>
-                      <span className="font-semibold text-foreground" data-testid={`text-total-sf-${index}`}>
+                      <span className="font-semibold text-foreground" data-testid={`text-total-sf-${property.id}`}>
                         {formatNumber(property.totalSF)} sf
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-muted-foreground">Occupied:</span>
-                      <span className="font-medium text-green-600" data-testid={`text-occupied-sf-${index}`}>
+                      <span className="font-medium text-green-600" data-testid={`text-occupied-sf-${property.id}`}>
                         {formatNumber(property.occupiedSF)} sf
                       </span>
                     </div>
                     {property.vacantSF > 0 && (
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-muted-foreground">Available:</span>
-                        <span className="font-medium text-yellow-600" data-testid={`text-vacant-sf-${index}`}>
+                        <span className="font-medium text-yellow-600" data-testid={`text-vacant-sf-${property.id}`}>
                           {formatNumber(property.vacantSF)} sf
                         </span>
                       </div>
@@ -168,6 +178,15 @@ export default function PropertyPortfolio() {
             );
           })}
         </div>
+        
+        {/* Empty state for no properties */}
+        {properties.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No properties available at this time.</p>
+          </div>
+        )}
+        </>
+        )}
       </div>
     </section>
   );
