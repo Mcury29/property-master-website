@@ -1,23 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Building, Wrench, Trees, ArrowRight } from 'lucide-react';
+import { Wrench, Trees, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 import { motion } from 'motion/react';
 import { useScrollAnimation, fadeInUp, staggerContainer, scaleIn } from '@/hooks/useScrollAnimation';
 
 const services = [
-  {
-    icon: Building,
-    title: 'Commercial Property Management',
-    description: 'Our commercial real estate team connects businesses with professional, well-maintained spaces across Edmonton and surrounding area.',
-    features: [
-      'Office, retail, and mixed-use leasing opportunities',
-      'Local market expertise for smarter decisions',
-      'Professional property marketing and showcasing',
-      'Guidance through the full leasing process'
-    ],
-    url: '/services/commercial-real-estate'
-  },
   {
     icon: Wrench,
     title: 'Maintenance Services',
