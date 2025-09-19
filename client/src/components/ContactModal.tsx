@@ -150,8 +150,7 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
                 </div>
                 <div className="space-y-1 text-sm text-muted-foreground">
                   <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
-                  <p>Saturday: 9:00 AM - 3:00 PM</p>
-                  <p>Sunday: Closed</p>
+                  <p>24/7 Emergency Services</p>
                 </div>
               </div>
             </div>
