@@ -59,7 +59,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center space-x-3 text-sm">
                   <Mail className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span className="text-muted-foreground">information@propertymasters.ca</span>
+                  <span className="text-muted-foreground">reception@propertymasters.ca</span>
                 </div>
               </div>
             </div>

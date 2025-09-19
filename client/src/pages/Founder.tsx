@@ -228,7 +228,7 @@ export default function Founder() {
                 </h3>
                 <p className="text-muted-foreground">
                   Denis began with a simple idea: do the work right, do it with integrity, and the results will follow. 
-                  What started with small projects grew into a respected company trusted by landlords, tenants, and 
+                  What started with small projects grew into a respected company trusted by commercial investors, tenants, and 
                   contractors alike. His hands-on approach and attention to detail set a precedent that continues 
                   to define how we operate.
                 </p>

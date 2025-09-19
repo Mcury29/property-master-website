@@ -137,7 +137,7 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
                   <h4 className="font-semibold">Email</h4>
                 </div>
                 <div className="space-y-1 text-sm text-muted-foreground">
-                  <p>information@propertymasters.ca</p>
+                  <p>reception@propertymasters.ca</p>
                   <p>nbeaudoin@propertymasters.ca</p>
                   <p>rlepage@propertymasters.ca</p>
                 </div>

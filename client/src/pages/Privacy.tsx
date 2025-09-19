@@ -117,7 +117,7 @@ export default function Privacy() {
               <p><strong>Property Masters Group of Companies</strong></p>
               <p>152 Sioux Road, Sherwood Park, AB</p>
               <p>Phone: 780-464-1518</p>
-              <p>Email: information@propertymasters.ca</p>
+              <p>Email: reception@propertymasters.ca</p>
             </div>
           </section>
 
