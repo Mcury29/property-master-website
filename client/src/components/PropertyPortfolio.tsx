@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Building, MapPin, Users, TrendingUp } from 'lucide-react';
+import { Building, MapPin, Users, TrendingUp, ShoppingBag, Briefcase, Home } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import type { Property } from '@shared/schema';
 
@@ -14,6 +14,101 @@ const calculatePortfolioStats = (properties: Property[]) => {
   return { totalSF, occupiedSF, vacantSF, occupancyRate };
 };
 
+// Categorize properties by type
+const categorizeProperties = (properties: Property[]) => {
+  const retail = properties.filter(p => p.propertyType === 'retail');
+  const office = properties.filter(p => p.propertyType === 'office');
+  const mixedUse = properties.filter(p => p.propertyType === 'mixed-use');
+  
+  return { retail, office, mixedUse };
+};
+
+// Property Category Component
+const PropertyCategory = ({ title, properties, icon: Icon, count }: { 
+  title: string; 
+  properties: Property[]; 
+  icon: any; 
+  count: number;
+}) => {
+  const formatNumber = (num: number) => {
+    return new Intl.NumberFormat().format(num);
+  };
+
+  const getOccupancyRate = (occupied: number, total: number) => {
+    return ((occupied / total) * 100).toFixed(1);
+  };
+
+  if (properties.length === 0) return null;
+
+  return (
+    <div className="mb-16">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="bg-primary/10 p-2 rounded-lg">
+          <Icon className="w-6 h-6 text-primary" />
+        </div>
+        <div>
+          <h3 className="text-2xl font-bold text-foreground">{title}</h3>
+          <p className="text-muted-foreground">{count} {count === 1 ? 'property' : 'properties'}</p>
+        </div>
+      </div>
+      
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {properties.map((property) => {
+          const occupancyRate = parseFloat(getOccupancyRate(property.occupiedSF, property.totalSF));
+          return (
+            <Card key={property.id} className="hover-elevate transition-all duration-300" data-testid={`card-property-${property.id}`}>
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <CardTitle className="text-lg font-semibold text-foreground mb-2">
+                      {property.name}
+                    </CardTitle>
+                    <div className="flex items-center text-sm text-muted-foreground mb-3">
+                      <MapPin className="w-4 h-4 mr-1" />
+                      {property.address}
+                    </div>
+                  </div>
+                  <Badge 
+                    variant={occupancyRate === 100 ? 'default' : occupancyRate >= 90 ? 'secondary' : 'destructive'}
+                    className="ml-2"
+                    data-testid={`badge-occupancy-${property.id}`}
+                  >
+                    {occupancyRate}% Occupied
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-muted-foreground">Total:</span>
+                    <span className="font-semibold text-foreground" data-testid={`text-total-sf-${property.id}`}>
+                      {formatNumber(property.totalSF)} sf
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-muted-foreground">Occupied:</span>
+                    <span className="font-medium text-green-600" data-testid={`text-occupied-sf-${property.id}`}>
+                      {formatNumber(property.occupiedSF)} sf
+                    </span>
+                  </div>
+                  {property.vacantSF > 0 && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Available:</span>
+                      <span className="font-medium text-yellow-600" data-testid={`text-vacant-sf-${property.id}`}>
+                        {formatNumber(property.vacantSF)} sf
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 export default function PropertyPortfolio() {
   // Fetch properties from API
   const { data: properties = [], isLoading, isError } = useQuery<Property[]>({
@@ -24,16 +119,7 @@ export default function PropertyPortfolio() {
     return new Intl.NumberFormat().format(num);
   };
 
-  const getOccupancyRate = (occupied: number, total: number) => {
-    return ((occupied / total) * 100).toFixed(1);
-  };
-
-  const getOccupancyColor = (rate: number) => {
-    if (rate === 100) return 'text-green-500';
-    if (rate >= 90) return 'text-primary';
-    if (rate >= 75) return 'text-yellow-500';
-    return 'text-red-500';
-  };
+  const categorizedProperties = categorizeProperties(properties);
 
   return (
     <section className="py-24 bg-card">
@@ -124,60 +210,27 @@ export default function PropertyPortfolio() {
           </Card>
         </div>
 
-        {/* Properties Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {properties.map((property) => {
-            const occupancyRate = parseFloat(getOccupancyRate(property.occupiedSF, property.totalSF));
-            return (
-              <Card key={property.id} className="hover-elevate transition-all duration-300" data-testid={`card-property-${property.id}`}>
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <CardTitle className="text-lg font-semibold text-foreground mb-2">
-                        {property.name}
-                      </CardTitle>
-                      <div className="flex items-center text-sm text-muted-foreground mb-3">
-                        <MapPin className="w-4 h-4 mr-1" />
-                        {property.address}
-                      </div>
-                    </div>
-                    <Badge 
-                      variant={occupancyRate === 100 ? 'default' : occupancyRate >= 90 ? 'secondary' : 'destructive'}
-                      className="ml-2"
-                      data-testid={`badge-occupancy-${property.id}`}
-                    >
-                      {occupancyRate}% Occupied
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Total:</span>
-                      <span className="font-semibold text-foreground" data-testid={`text-total-sf-${property.id}`}>
-                        {formatNumber(property.totalSF)} sf
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Occupied:</span>
-                      <span className="font-medium text-green-600" data-testid={`text-occupied-sf-${property.id}`}>
-                        {formatNumber(property.occupiedSF)} sf
-                      </span>
-                    </div>
-                    {property.vacantSF > 0 && (
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">Available:</span>
-                        <span className="font-medium text-yellow-600" data-testid={`text-vacant-sf-${property.id}`}>
-                          {formatNumber(property.vacantSF)} sf
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+        {/* Categorized Properties */}
+        <PropertyCategory 
+          title="Shopping Centers & Retail" 
+          properties={categorizedProperties.retail}
+          icon={ShoppingBag}
+          count={categorizedProperties.retail.length}
+        />
+        
+        <PropertyCategory 
+          title="Professional & Office Buildings" 
+          properties={categorizedProperties.office}
+          icon={Briefcase}
+          count={categorizedProperties.office.length}
+        />
+        
+        <PropertyCategory 
+          title="Mixed Use & Special Properties" 
+          properties={categorizedProperties.mixedUse}
+          icon={Home}
+          count={categorizedProperties.mixedUse.length}
+        />
         
         {/* Empty state for no properties */}
         {properties.length === 0 && (
