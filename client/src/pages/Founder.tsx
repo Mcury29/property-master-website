@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { User, Heart, Building } from 'lucide-react';
 import ContactModal from '@/components/ContactModal';
-import founderImage from '@assets/Gemini_Generated_Image_p5egtzp5egtzp5eg_1758259774286.png';
+import founderImage from '@assets/Gemini_Generated_Image_p5egtzp5egtzp5eg_1758291318582.png';
 
 export default function Founder() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
