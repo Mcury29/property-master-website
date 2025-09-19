@@ -26,7 +26,7 @@ const services = [
       'Painting, signage, and tenant improvements',
       'Interior and exterior repair solutions',
       'Plumbing & quarterly HVAC preventative maintenance',
-      'Window washing and ongoing building upkeep'
+      'Ongoing building upkeep'
     ],
     url: '/services/maintenance'
   },
@@ -38,6 +38,7 @@ const services = [
       'Turf care and seasonal landscaping',
       'Snow removal and ice control',
       'Parking lot clearing and upkeep',
+      'Window washing',
       'Site detailing and litter management'
     ],
     url: '/services/grounds'
