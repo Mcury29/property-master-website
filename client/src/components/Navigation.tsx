@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Building2 } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import logoImage from '@assets/E282EEC4-B02B-4D23-B1FB-FF01F386B9D2_1758250152212.png';
 
 const navigationItems = [
   { title: 'Home', url: '/' },
@@ -20,8 +21,8 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 hover-elevate rounded-md px-2 py-1" data-testid="link-home">
-            <Building2 className="h-8 w-8 text-primary" />
+          <Link href="/" className="flex items-center space-x-3 hover-elevate rounded-md px-2 py-1" data-testid="link-home">
+            <img src={logoImage} alt="Property Masters Logo" className="h-10 w-10 object-contain" />
             <div className="flex flex-col">
               <span className="font-bold text-lg text-foreground">Property Masters</span>
               <span className="text-xs text-muted-foreground">Group of Companies</span>

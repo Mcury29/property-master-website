@@ -1,6 +1,7 @@
 import { Link } from 'wouter';
-import { Building2, MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import logoImage from '@assets/E282EEC4-B02B-4D23-B1FB-FF01F386B9D2_1758250152212.png';
 
 const footerSections = {
   services: [
@@ -30,8 +31,8 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center space-x-2 mb-6 hover-elevate rounded-md px-2 py-1 w-fit" data-testid="link-footer-home">
-              <Building2 className="h-8 w-8 text-primary" />
+            <Link href="/" className="flex items-center space-x-3 mb-6 hover-elevate rounded-md px-2 py-1 w-fit" data-testid="link-footer-home">
+              <img src={logoImage} alt="Property Masters Logo" className="h-10 w-10 object-contain" />
               <div className="flex flex-col">
                 <span className="font-bold text-lg text-foreground">Property Masters</span>
                 <span className="text-xs text-muted-foreground">Group of Companies</span>
