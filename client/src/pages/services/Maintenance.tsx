@@ -5,8 +5,8 @@ import { Wrench, Shield, Clock, Settings, CheckCircle, Zap, Award, Gauge } from 
 import { motion } from 'motion/react';
 import { useScrollAnimation, fadeInUp, fadeInLeft, fadeInRight, staggerContainer, scaleIn } from '@/hooks/useScrollAnimation';
 import ContactModal from '@/components/ContactModal';
-import maintenanceImage1 from '@assets/stock_images/building_maintenance_e8762a23.jpg';
-import maintenanceImage2 from '@assets/stock_images/building_maintenance_d8c8921e.jpg';
+import maintenanceImage1 from '@assets/stock_images/aerial_platform_lift_4393ff4b.jpg';
+import maintenanceImage2 from '@assets/stock_images/electrician_electric_e3402298.jpg';
 
 export default function Maintenance() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
@@ -72,14 +72,14 @@ export default function Maintenance() {
               <div className="rounded-lg overflow-hidden">
                 <img 
                   src={maintenanceImage1}
-                  alt="Professional Building Maintenance HVAC Services"
+                  alt="Aerial Platform Lift Maintenance Services"
                   className="w-full h-64 lg:h-80 object-cover"
                 />
               </div>
               <div className="rounded-lg overflow-hidden">
                 <img 
                   src={maintenanceImage2}
-                  alt="Commercial Building Maintenance and Repair"
+                  alt="Professional Electrician and Electrical Maintenance"
                   className="w-full h-64 lg:h-80 object-cover"
                 />
               </div>

@@ -6,7 +6,7 @@ import { motion } from 'motion/react';
 import { useScrollAnimation, fadeInUp, fadeInLeft, fadeInRight, staggerContainer, scaleIn } from '@/hooks/useScrollAnimation';
 import ContactModal from '@/components/ContactModal';
 import groundsImage1 from '@assets/stock_images/professional_landsca_49943dbf.jpg';
-import groundsImage2 from '@assets/stock_images/professional_landsca_3b5047ec.jpg';
+import groundsImage2 from '@assets/stock_images/professional_lawn_mo_2938dab1.jpg';
 
 export default function Grounds() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
@@ -79,7 +79,7 @@ export default function Grounds() {
               <div className="rounded-lg overflow-hidden">
                 <img 
                   src={groundsImage2}
-                  alt="Commercial Property Grounds Maintenance"
+                  alt="Professional Lawn Mowing and Grass Cutting Services"
                   className="w-full h-64 lg:h-80 object-cover"
                 />
               </div>

@@ -4,12 +4,14 @@ import { Button } from '@/components/ui/button';
 import { Building, MapPin, TrendingUp, Users, CheckCircle, Clock, Award, Target } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useScrollAnimation, fadeInUp, fadeInLeft, fadeInRight, staggerContainer, scaleIn } from '@/hooks/useScrollAnimation';
+import { useLocation } from 'wouter';
 import ContactModal from '@/components/ContactModal';
 import commercialRealEstateImage1 from '@assets/stock_images/modern_commercial_re_ed738e09.jpg';
 import commercialRealEstateImage2 from '@assets/stock_images/modern_commercial_re_763fba34.jpg';
 
 export default function CommercialRealEstate() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
+  const [, setLocation] = useLocation();
   const { ref: heroRef, isInView: heroInView } = useScrollAnimation();
   const { ref: imageRef, isInView: imageInView } = useScrollAnimation();
   const { ref: servicesRef, isInView: servicesInView } = useScrollAnimation();
@@ -52,6 +54,10 @@ export default function CommercialRealEstate() {
                 variant="outline" 
                 size="lg"
                 className="border-white/20 text-white hover:bg-white/10"
+                onClick={() => {
+                  setLocation('/properties');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 data-testid="button-view-properties-cre"
               >
                 View Available Properties
@@ -225,7 +231,7 @@ export default function CommercialRealEstate() {
           {/* Process Section */}
           <motion.section 
             ref={processRef}
-            className="mb-16 bg-slate-50 p-8 rounded-lg"
+            className="mb-16 bg-slate-100 p-8 rounded-lg border border-slate-200"
             variants={staggerContainer}
             initial="hidden"
             animate={processInView ? "visible" : "hidden"}
@@ -233,7 +239,7 @@ export default function CommercialRealEstate() {
             <motion.h2 className="text-3xl font-bold text-foreground mb-4" variants={fadeInUp}>
               Our Proven Process
             </motion.h2>
-            <motion.p className="text-lg text-muted-foreground mb-8" variants={fadeInUp}>
+            <motion.p className="text-lg text-slate-600 mb-8" variants={fadeInUp}>
               We've streamlined our approach to make finding your perfect commercial space 
               as efficient and stress-free as possible.
             </motion.p>
@@ -242,29 +248,29 @@ export default function CommercialRealEstate() {
                 <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-primary font-bold">1</span>
                 </div>
-                <h4 className="font-semibold text-foreground mb-2">Consultation</h4>
-                <p className="text-sm text-muted-foreground">Understanding your specific needs, budget, and timeline</p>
+                <h4 className="font-semibold text-slate-900 mb-2">Consultation</h4>
+                <p className="text-sm text-slate-600">Understanding your specific needs, budget, and timeline</p>
               </motion.div>
               <motion.div className="text-center" variants={scaleIn}>
                 <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-primary font-bold">2</span>
                 </div>
-                <h4 className="font-semibold text-foreground mb-2">Site Selection</h4>
-                <p className="text-sm text-muted-foreground">Curated property options that match your criteria</p>
+                <h4 className="font-semibold text-slate-900 mb-2">Site Selection</h4>
+                <p className="text-sm text-slate-600">Curated property options that match your criteria</p>
               </motion.div>
               <motion.div className="text-center" variants={scaleIn}>
                 <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-primary font-bold">3</span>
                 </div>
-                <h4 className="font-semibold text-foreground mb-2">Negotiation</h4>
-                <p className="text-sm text-muted-foreground">Securing favorable lease terms and conditions</p>
+                <h4 className="font-semibold text-slate-900 mb-2">Negotiation</h4>
+                <p className="text-sm text-slate-600">Securing favorable lease terms and conditions</p>
               </motion.div>
               <motion.div className="text-center" variants={scaleIn}>
                 <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-primary font-bold">4</span>
                 </div>
-                <h4 className="font-semibold text-foreground mb-2">Move-In</h4>
-                <p className="text-sm text-muted-foreground">Smooth transition into your new commercial space</p>
+                <h4 className="font-semibold text-slate-900 mb-2">Move-In</h4>
+                <p className="text-sm text-slate-600">Smooth transition into your new commercial space</p>
               </motion.div>
             </div>
           </motion.section>
