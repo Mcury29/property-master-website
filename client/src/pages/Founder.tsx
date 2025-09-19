@@ -172,54 +172,52 @@ export default function Founder() {
           {/* Our Story Section */}
           <section id="our-story" className="mb-16">
             <h2 className="text-3xl font-bold text-foreground mb-8">Our Story</h2>
-            <div className="prose prose-lg max-w-none text-muted-foreground">
-              <div className="grid lg:grid-cols-2 gap-12">
-                <div className="space-y-6">
-                  <p>
-                    <strong>Building From the Ground Up</strong>
-                  </p>
-                  <p>
-                    Denis began with a simple idea: do the work right, do it with integrity, and the results will follow. 
-                    What started with small projects grew into a respected company trusted by landlords, tenants, and 
-                    contractors alike. His hands-on approach and attention to detail set a precedent that continues 
-                    to define how we operate.
-                  </p>
+            <div className="grid lg:grid-cols-2 gap-12">
+              <div className="space-y-6">
+                <h3 className="text-xl font-semibold text-primary mb-3">
+                  Building From the Ground Up
+                </h3>
+                <p className="text-muted-foreground">
+                  Denis began with a simple idea: do the work right, do it with integrity, and the results will follow. 
+                  What started with small projects grew into a respected company trusted by landlords, tenants, and 
+                  contractors alike. His hands-on approach and attention to detail set a precedent that continues 
+                  to define how we operate.
+                </p>
 
-                  <p>
-                    <strong>Shaping the Company's Core</strong>
-                  </p>
-                  <p>
-                    Under Denis' leadership, the company expanded beyond its early beginnings, earning a reputation 
-                    for reliability and care. He instilled values that became the backbone of our business: 
-                    accountability, respect, responsiveness, and a commitment to long-term relationships.
-                  </p>
-                  <p>
-                    These weren't just business strategies — they were Denis' personal principles, woven into the DNA of the company.
-                  </p>
-                </div>
+                <h3 className="text-xl font-semibold text-primary mb-3">
+                  Shaping the Company's Core
+                </h3>
+                <p className="text-muted-foreground">
+                  Under Denis' leadership, the company expanded beyond its early beginnings, earning a reputation 
+                  for reliability and care. He instilled values that became the backbone of our business: 
+                  accountability, respect, responsiveness, and a commitment to long-term relationships.
+                </p>
+                <p className="text-muted-foreground">
+                  These weren't just business strategies — they were Denis' personal principles, woven into the DNA of the company.
+                </p>
+              </div>
 
-                <div className="space-y-6">
-                  <p>
-                    <strong>His Enduring Philosophy</strong>
-                  </p>
-                  <p>
-                    For Denis, property management was about responsibility — to clients, to tenants, to the community, 
-                    and to the people working alongside him. His belief that "you treat every property as if it were your own" 
-                    remains the gold standard we uphold.
-                  </p>
+              <div className="space-y-6">
+                <h3 className="text-xl font-semibold text-primary mb-3">
+                  His Enduring Philosophy
+                </h3>
+                <p className="text-muted-foreground">
+                  For Denis, property management was about responsibility — to clients, to tenants, to the community, 
+                  and to the people working alongside him. His belief that "you treat every property as if it were your own" 
+                  remains the gold standard we uphold.
+                </p>
 
-                  <p>
-                    <strong>A Lasting Impact</strong>
-                  </p>
-                  <p>
-                    Denis was more than a founder; he was a mentor, a leader, and an inspiration. His vision lives on 
-                    in the systems, values, and culture that continue to drive the company forward.
-                  </p>
-                  <p>
-                    Every success we achieve today stands on the foundation he built. Denis' legacy is not only the properties managed, 
-                    or the projects completed, but the trust and reputation he established — a legacy that endures and grows with each passing year.
-                  </p>
-                </div>
+                <h3 className="text-xl font-semibold text-primary mb-3">
+                  A Lasting Impact
+                </h3>
+                <p className="text-muted-foreground">
+                  Denis was more than a founder; he was a mentor, a leader, and an inspiration. His vision lives on 
+                  in the systems, values, and culture that continue to drive the company forward.
+                </p>
+                <p className="text-muted-foreground">
+                  Every success we achieve today stands on the foundation he built. Denis' legacy is not only the properties managed, 
+                  or the projects completed, but the trust and reputation he established — a legacy that endures and grows with each passing year.
+                </p>
               </div>
             </div>
           </section>
