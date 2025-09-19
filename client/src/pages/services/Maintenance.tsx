@@ -6,7 +6,7 @@ import { motion } from 'motion/react';
 import { useScrollAnimation, fadeInUp, fadeInLeft, fadeInRight, staggerContainer, scaleIn } from '@/hooks/useScrollAnimation';
 import ContactModal from '@/components/ContactModal';
 import maintenanceImage1 from '@assets/stock_images/aerial_platform_lift_4393ff4b.jpg';
-import maintenanceImage2 from '@assets/stock_images/electrician_electric_e3402298.jpg';
+import maintenanceImage2 from '@assets/stock_images/aerial_platform_lift_4940b333.jpg';
 
 export default function Maintenance() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
@@ -79,7 +79,7 @@ export default function Maintenance() {
               <div className="rounded-lg overflow-hidden">
                 <img 
                   src={maintenanceImage2}
-                  alt="Professional Electrician and Electrical Maintenance"
+                  alt="Aerial Platform Lift Construction and Maintenance Work"
                   className="w-full h-64 lg:h-80 object-cover"
                 />
               </div>
