@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Building, Wrench, Trees, ArrowRight } from 'lucide-react';
+import { Link } from 'wouter';
 
 const services = [
   {
@@ -12,7 +13,8 @@ const services = [
       'Local market expertise for smarter decisions',
       'Professional property marketing and showcasing',
       'Guidance through the full leasing process'
-    ]
+    ],
+    url: '/services/commercial-real-estate'
   },
   {
     icon: Wrench,
@@ -23,7 +25,8 @@ const services = [
       'Interior and exterior repair solutions',
       'Plumbing & quarterly HVAC preventative maintenance',
       'Window washing and ongoing building upkeep'
-    ]
+    ],
+    url: '/services/maintenance'
   },
   {
     icon: Trees,
@@ -34,7 +37,8 @@ const services = [
       'Snow removal and ice control',
       'Parking lot clearing and upkeep',
       'Site detailing and litter management'
-    ]
+    ],
+    url: '/services/grounds'
   }
 ];
 
@@ -73,9 +77,11 @@ export default function ServicesSection() {
                       </li>
                     ))}
                   </ul>
-                  <Button variant="outline" className="w-full group" data-testid={`button-learn-more-${index}`}>
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <Button asChild variant="outline" className="w-full group" data-testid={`button-learn-more-${index}`}>
+                    <Link href={service.url}>
+                      Learn More
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -84,8 +90,8 @@ export default function ServicesSection() {
         </div>
 
         <div className="text-center mt-16">
-          <Button size="lg" data-testid="button-view-all-services">
-            View All Services
+          <Button asChild size="lg" data-testid="button-view-all-services">
+            <Link href="/services">View All Services</Link>
           </Button>
         </div>
       </div>

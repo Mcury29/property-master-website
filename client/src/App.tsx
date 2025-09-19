@@ -9,6 +9,9 @@ import Home from "@/pages/Home";
 import Services from "@/pages/Services";
 import Properties from "@/pages/Properties";
 import Contact from "@/pages/Contact";
+import CommercialRealEstate from "@/pages/services/CommercialRealEstate";
+import Maintenance from "@/pages/services/Maintenance";
+import Grounds from "@/pages/services/Grounds";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -16,6 +19,9 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/services" component={Services} />
+      <Route path="/services/commercial-real-estate" component={CommercialRealEstate} />
+      <Route path="/services/maintenance" component={Maintenance} />
+      <Route path="/services/grounds" component={Grounds} />
       <Route path="/properties" component={Properties} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />

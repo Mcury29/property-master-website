@@ -10,7 +10,6 @@ import {
 import { Menu, X, ChevronDown, Building2, Wrench, Trees } from 'lucide-react';
 import logoImage from '@assets/E282EEC4-B02B-4D23-B1FB-FF01F386B9D2_1758250152212.png';
 import ContactModal from '@/components/ContactModal';
-import DivisionModal from '@/components/DivisionModal';
 
 const navigationItems = [
   { title: 'Home', url: '/' },
@@ -19,9 +18,9 @@ const navigationItems = [
     url: '/services',
     hasDropdown: true,
     divisions: [
-      { title: 'Realty/Property Management', key: 'realty', icon: Building2 },
-      { title: 'Maintenance', key: 'maintenance', icon: Wrench },
-      { title: 'Grounds', key: 'grounds', icon: Trees }
+      { title: 'Realty/Property Management', key: 'realty', icon: Building2, url: '/services/commercial-real-estate' },
+      { title: 'Maintenance', key: 'maintenance', icon: Wrench, url: '/services/maintenance' },
+      { title: 'Grounds', key: 'grounds', icon: Trees, url: '/services/grounds' }
     ]
   },
   { title: 'Properties', url: '/properties' }
@@ -31,13 +30,6 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location] = useLocation();
   const [contactModalOpen, setContactModalOpen] = useState(false);
-  const [divisionModalOpen, setDivisionModalOpen] = useState(false);
-  const [selectedDivision, setSelectedDivision] = useState<'realty' | 'maintenance' | 'grounds' | null>(null);
-
-  const handleDivisionClick = (divisionKey: 'realty' | 'maintenance' | 'grounds') => {
-    setSelectedDivision(divisionKey);
-    setDivisionModalOpen(true);
-  };
 
   return (
     <>
@@ -80,14 +72,15 @@ export default function Navigation() {
                           {item.divisions?.map((division) => {
                             const IconComponent = division.icon;
                             return (
-                              <DropdownMenuItem
-                                key={division.key}
-                                onClick={() => handleDivisionClick(division.key as 'realty' | 'maintenance' | 'grounds')}
-                                className="cursor-pointer"
-                                data-testid={`menu-item-${division.key}`}
-                              >
-                                <IconComponent className="w-4 h-4 mr-2 text-primary" />
-                                {division.title}
+                              <DropdownMenuItem key={division.key} asChild>
+                                <Link
+                                  href={division.url}
+                                  className="flex items-center cursor-pointer"
+                                  data-testid={`menu-item-${division.key}`}
+                                >
+                                  <IconComponent className="w-4 h-4 mr-2 text-primary" />
+                                  {division.title}
+                                </Link>
                               </DropdownMenuItem>
                             );
                           })}
@@ -163,18 +156,16 @@ export default function Navigation() {
                         {item.divisions?.map((division) => {
                           const IconComponent = division.icon;
                           return (
-                            <button
+                            <Link
                               key={division.key}
-                              onClick={() => {
-                                handleDivisionClick(division.key as 'realty' | 'maintenance' | 'grounds');
-                                setIsMobileMenuOpen(false);
-                              }}
+                              href={division.url}
+                              onClick={() => setIsMobileMenuOpen(false)}
                               className="flex items-center w-full px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-primary hover-elevate transition-colors"
-                              data-testid={`button-mobile-${division.key}`}
+                              data-testid={`link-mobile-${division.key}`}
                             >
                               <IconComponent className="w-4 h-4 mr-2" />
                               {division.title}
-                            </button>
+                            </Link>
                           );
                         })}
                       </div>
@@ -218,12 +209,6 @@ export default function Navigation() {
       <ContactModal 
         open={contactModalOpen} 
         onOpenChange={setContactModalOpen}
-      />
-      
-      <DivisionModal 
-        open={divisionModalOpen} 
-        onOpenChange={setDivisionModalOpen}
-        division={selectedDivision}
       />
     </>
   );
