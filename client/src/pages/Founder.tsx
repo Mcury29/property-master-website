@@ -96,11 +96,11 @@ export default function Founder() {
               {/* Founder Image */}
               <div className="order-1 lg:order-2 flex justify-center">
                 <div className="relative">
-                  <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-lg overflow-hidden border-4 border-primary/20">
+                  <div className="w-80 lg:w-96 rounded-lg overflow-hidden border-4 border-primary/20" style={{ height: '480px' }}>
                     <img 
                       src={founderImage}
                       alt="Portrait of Denis LePage, Founder of Property Masters"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       loading="eager"
                       data-testid="img-founder-portrait"
                     />
