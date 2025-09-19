@@ -17,7 +17,6 @@ const footerSections = {
     { title: 'Portfolio Overview', url: '/properties' }
   ],
   company: [
-    { title: 'About Us', url: '/about' },
     { title: 'Our Divisions', url: '/divisions' },
     { title: 'Contact Us', url: '/contact' },
     { title: 'Privacy Policy', url: '/privacy' }
@@ -115,11 +114,11 @@ export default function Footer() {
             </ul>
             
             <div className="space-y-3">
-              <Button className="w-full" size="sm" data-testid="button-footer-quote">
-                Get a Quote
+              <Button asChild className="w-full" size="sm" data-testid="button-footer-contact">
+                <Link href="/contact">Contact Us</Link>
               </Button>
-              <Button variant="outline" className="w-full" size="sm" data-testid="button-footer-schedule">
-                Schedule Meeting
+              <Button asChild variant="outline" className="w-full" size="sm" data-testid="button-footer-schedule">
+                <Link href="/contact">Schedule Meeting</Link>
               </Button>
             </div>
           </div>

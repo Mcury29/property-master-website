@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Link } from 'wouter';
 import heroImage from '@assets/IMG_0033_1758250313114.jpeg';
 
 export default function HeroSection() {
@@ -30,11 +31,11 @@ export default function HeroSection() {
               seamless, reliable service.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="text-lg px-8" data-testid="button-request-quote">
-                Request a Quote
+              <Button asChild size="lg" className="text-lg px-8" data-testid="button-contact-us">
+                <Link href="/contact">Contact Us</Link>
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 bg-background/10 backdrop-blur-sm border-white/20" data-testid="button-view-properties">
-                View Properties
+              <Button asChild variant="outline" size="lg" className="text-lg px-8 bg-background/10 backdrop-blur-sm border-white/20" data-testid="button-view-properties">
+                <Link href="/properties">View Properties</Link>
               </Button>
             </div>
             

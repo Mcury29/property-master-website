@@ -8,7 +8,6 @@ const navigationItems = [
   { title: 'Home', url: '/' },
   { title: 'Our Services', url: '/services' },
   { title: 'Properties', url: '/properties' },
-  { title: 'About Us', url: '/about' },
   { title: 'Contact Us', url: '/contact' }
 ];
 
@@ -53,8 +52,8 @@ export default function Navigation() {
           </div>
 
           <div className="hidden md:block">
-            <Button asChild data-testid="button-request-quote">
-              <Link href="/contact">Request a Quote</Link>
+            <Button asChild data-testid="button-contact-us">
+              <Link href="/contact">Contact Us</Link>
             </Button>
           </div>
 
@@ -95,8 +94,8 @@ export default function Navigation() {
               );
             })}
             <div className="pt-2">
-              <Button asChild className="w-full" data-testid="button-mobile-request-quote">
-                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>Request a Quote</Link>
+              <Button asChild className="w-full" data-testid="button-mobile-contact-us">
+                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</Link>
               </Button>
             </div>
           </div>

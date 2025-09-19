@@ -1,6 +1,6 @@
 import HeroSection from '@/components/HeroSection';
 import ServicesSection from '@/components/ServicesSection';
-import PropertyPortfolio from '@/components/PropertyPortfolio';
+import WhyChooseUs from '@/components/WhyChooseUs';
 import ContactForm from '@/components/ContactForm';
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
     <div className="min-h-screen">
       <HeroSection />
       <ServicesSection />
-      <PropertyPortfolio />
+      <WhyChooseUs />
       <ContactForm />
     </div>
   );
