@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Building, MapPin, TrendingUp, Users, CheckCircle, Clock, Award, Target } from 'lucide-react';
+import { Building, Users, FileText, CheckCircle, Clock, Award, Target, DollarSign, MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useScrollAnimation, fadeInUp, fadeInLeft, fadeInRight, staggerContainer, scaleIn } from '@/hooks/useScrollAnimation';
 import { useLocation } from 'wouter';
@@ -38,9 +38,9 @@ export default function CommercialRealEstate() {
               <h1 className="text-4xl md:text-5xl font-bold">Commercial Property Management</h1>
             </motion.div>
             <motion.p className="text-xl text-slate-300 max-w-3xl mb-8" variants={fadeInLeft}>
-              Our commercial real estate team connects businesses with professional, well-maintained spaces 
-              across Edmonton and surrounding area. With over 25 years of local market expertise, we help you 
-              find the perfect location for your business needs.
+              Our commercial property management division provides comprehensive asset management services for 
+              commercial property owners across Edmonton and surrounding area. With over 25 years of operational 
+              expertise, we maximize your investment returns while minimizing management burdens.
             </motion.p>
             <motion.div className="flex flex-col sm:flex-row gap-4" variants={fadeInLeft}>
               <Button 
@@ -48,19 +48,16 @@ export default function CommercialRealEstate() {
                 onClick={() => setContactModalOpen(true)}
                 data-testid="button-get-started-cre"
               >
-                Find Your Space
+                Optimize Your Property
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
                 className="border-white/20 text-white hover:bg-white/10"
-                onClick={() => {
-                  setLocation('/properties');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
+                onClick={() => setContactModalOpen(true)}
                 data-testid="button-view-properties-cre"
               >
-                View Available Properties
+                Schedule Assessment
               </Button>
             </motion.div>
           </motion.div>
@@ -104,42 +101,42 @@ export default function CommercialRealEstate() {
             animate={servicesInView ? "visible" : "hidden"}
           >
             <motion.h2 className="text-3xl font-bold text-foreground mb-4" variants={fadeInUp}>
-              Comprehensive Commercial Real Estate Services
+              Professional Property Management Solutions
             </motion.h2>
             <motion.p className="text-lg text-muted-foreground mb-8 max-w-3xl" variants={fadeInUp}>
-              From finding the perfect space to negotiating favorable lease terms, we provide end-to-end commercial 
-              real estate solutions that drive your business forward.
+              From tenant relations to financial oversight, we provide comprehensive property management solutions 
+              that maximize asset performance and deliver superior returns on your commercial real estate investments.
             </motion.p>
             <div className="grid md:grid-cols-2 gap-8">
               <motion.div variants={scaleIn}>
                 <Card className="h-full">
                   <CardHeader>
                     <CardTitle className="flex items-center">
-                      <MapPin className="w-5 h-5 text-primary mr-3" />
-                      Property Leasing & Acquisition
+                      <Users className="w-5 h-5 text-primary mr-3" />
+                      Tenant Relations & Leasing
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground mb-4">
-                      Whether you're expanding, relocating, or starting fresh, we'll find the ideal commercial space 
-                      that meets your specific business requirements and budget.
+                      Expert management of tenant relationships, lease administration, and occupancy optimization 
+                      to ensure maximum rental income and tenant satisfaction.
                     </p>
                     <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-start space-x-2">
                         <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                        <span>Office space leasing from 500 - 10,000+ sq ft</span>
+                        <span>Comprehensive tenant screening and placement</span>
                       </li>
                       <li className="flex items-start space-x-2">
                         <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                        <span>Retail storefronts and mixed-use opportunities</span>
+                        <span>Lease administration and renewal management</span>
                       </li>
                       <li className="flex items-start space-x-2">
                       <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Professional space consultation and planning</span>
+                      <span>Professional tenant communication and issue resolution</span>
                     </li>
                     <li className="flex items-start space-x-2">
                       <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Customized lease negotiations</span>
+                      <span>Vacancy marketing and strategic positioning</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -150,27 +147,31 @@ export default function CommercialRealEstate() {
                 <Card className="h-full">
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    <TrendingUp className="w-5 h-5 text-primary mr-3" />
-                    Market Analysis
+                    <DollarSign className="w-5 h-5 text-primary mr-3" />
+                    Financial Management & Reporting
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
+                  <p className="text-muted-foreground mb-4">
+                    Transparent financial oversight with detailed reporting and strategic recommendations 
+                    to maximize your property's investment performance.
+                  </p>
                   <ul className="space-y-2 text-muted-foreground">
                     <li className="flex items-start space-x-2">
                       <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Local market expertise and insights</span>
+                      <span>Monthly financial statements and cash flow analysis</span>
                     </li>
                     <li className="flex items-start space-x-2">
                       <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Competitive analysis and pricing</span>
+                      <span>Operating expense management and optimization</span>
                     </li>
                     <li className="flex items-start space-x-2">
                       <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Investment property valuations</span>
+                      <span>Rent collection and accounts receivable management</span>
                     </li>
                     <li className="flex items-start space-x-2">
                       <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Future development opportunities</span>
+                      <span>Budget preparation and capital expenditure planning</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -188,11 +189,11 @@ export default function CommercialRealEstate() {
             animate={whyChooseInView ? "visible" : "hidden"}
           >
             <motion.h2 className="text-3xl font-bold text-foreground mb-4" variants={fadeInUp}>
-              Why Choose Our Real Estate Team
+              Why Choose Our Property Management Team
             </motion.h2>
             <motion.p className="text-lg text-muted-foreground mb-8 max-w-3xl" variants={fadeInUp}>
-              With over two decades of experience in Alberta's commercial market, we bring deep local knowledge 
-              and proven expertise to every transaction.
+              With over two decades of experience in Alberta's commercial property management, we deliver 
+              professional oversight that maximizes asset value and minimizes owner involvement.
             </motion.p>
             <div className="grid md:grid-cols-3 gap-8">
               <motion.div className="text-center" variants={scaleIn}>

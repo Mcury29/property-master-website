@@ -9,12 +9,12 @@ const services = [
   {
     icon: Building,
     title: 'Commercial Property Management',
-    description: 'Our commercial real estate team connects businesses with professional, well-maintained spaces across Edmonton and surrounding area.',
+    description: 'Comprehensive day-to-day property management services that maximize asset value, minimize operational burden, and ensure optimal tenant satisfaction for commercial property owners.',
     features: [
-      'Office, retail, and mixed-use leasing opportunities',
-      'Local market expertise for smarter decisions',
-      'Professional property marketing and showcasing',
-      'Guidance through the full leasing process'
+      'Complete tenant relations and lease administration',
+      'Financial reporting and accounting oversight',
+      'Strategic property positioning and optimization',
+      'Regulatory compliance and risk management'
     ],
     url: '/services/commercial-real-estate'
   },
