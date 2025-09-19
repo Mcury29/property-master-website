@@ -6,6 +6,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { motion } from 'motion/react';
+import { useScrollAnimation, fadeInUp, fadeInLeft, fadeInRight, staggerContainer, scaleIn } from '@/hooks/useScrollAnimation';
 import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
@@ -13,6 +15,10 @@ import type { InsertContactInquiry } from '@shared/schema';
 
 export default function ContactForm() {
   const { toast } = useToast();
+  const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
+  const { ref: cardsRef, isInView: cardsInView } = useScrollAnimation();
+  const { ref: formRef, isInView: formInView } = useScrollAnimation();
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -88,85 +94,117 @@ export default function ContactForm() {
   return (
     <section className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+        <motion.div 
+          ref={headerRef}
+          className="text-center mb-16"
+          variants={staggerContainer}
+          initial="hidden"
+          animate={headerInView ? "visible" : "hidden"}
+        >
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold text-foreground mb-6"
+            variants={fadeInUp}
+          >
             Contact <span className="text-primary">Us</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-muted-foreground max-w-3xl mx-auto"
+            variants={fadeInUp}
+          >
             We're ready to help — whether you're searching for space, need maintenance, 
             or want grounds care you can trust. Connect with us today.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Information */}
-          <div className="lg:col-span-1">
+          <motion.div 
+            ref={cardsRef}
+            className="lg:col-span-1"
+            variants={staggerContainer}
+            initial="hidden"
+            animate={cardsInView ? "visible" : "hidden"}
+          >
             <div className="space-y-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center text-lg">
-                    <MapPin className="w-5 h-5 text-primary mr-3" />
-                    Our Location
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    152 Sioux Road<br />
-                    Sherwood Park, AB
-                  </p>
-                </CardContent>
-              </Card>
+              <motion.div variants={scaleIn}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-lg">
+                      <MapPin className="w-5 h-5 text-primary mr-3" />
+                      Our Location
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      152 Sioux Road<br />
+                      Sherwood Park, AB
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center text-lg">
-                    <Phone className="w-5 h-5 text-primary mr-3" />
-                    Phone
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    780-464-1518
-                  </p>
-                </CardContent>
-              </Card>
+              <motion.div variants={scaleIn}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-lg">
+                      <Phone className="w-5 h-5 text-primary mr-3" />
+                      Phone
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      780-464-1518
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center text-lg">
-                    <Mail className="w-5 h-5 text-primary mr-3" />
-                    Email
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-1 text-muted-foreground">
-                    <p>information@propertymasters.ca</p>
-                    <p>nbeaudoin@propertymasters.ca</p>
-                    <p>rlepage@propertymasters.ca</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <motion.div variants={scaleIn}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-lg">
+                      <Mail className="w-5 h-5 text-primary mr-3" />
+                      Email
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-1 text-muted-foreground">
+                      <p>information@propertymasters.ca</p>
+                      <p>nbeaudoin@propertymasters.ca</p>
+                      <p>rlepage@propertymasters.ca</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center text-lg">
-                    <Clock className="w-5 h-5 text-primary mr-3" />
-                    Business Hours
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-1 text-muted-foreground">
-                    <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
-                    <p>Saturday: 9:00 AM - 3:00 PM</p>
-                    <p>Sunday: Closed</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <motion.div variants={scaleIn}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-lg">
+                      <Clock className="w-5 h-5 text-primary mr-3" />
+                      Business Hours
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-1 text-muted-foreground">
+                      <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                      <p>Saturday: 9:00 AM - 3:00 PM</p>
+                      <p>Sunday: Closed</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-2">
+          <motion.div 
+            ref={formRef}
+            className="lg:col-span-2"
+            variants={fadeInRight}
+            initial="hidden"
+            animate={formInView ? "visible" : "hidden"}
+          >
             <Card>
               <CardHeader>
                 <CardTitle className="text-2xl font-semibold text-foreground">
@@ -267,7 +305,7 @@ export default function ContactForm() {
                 </form>
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
