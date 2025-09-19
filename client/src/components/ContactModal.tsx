@@ -149,7 +149,7 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
                   <h4 className="font-semibold">Business Hours</h4>
                 </div>
                 <div className="space-y-1 text-sm text-muted-foreground">
-                  <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                  <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
                   <p>Saturday: 9:00 AM - 3:00 PM</p>
                   <p>Sunday: Closed</p>
                 </div>
