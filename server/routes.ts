@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertPropertySchema, insertContactInquirySchema } from "@shared/schema";
+import { sendContactInquiryNotification } from "./sendgrid";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Property routes
@@ -139,6 +140,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Extract consent and pass the rest to storage (consent is not persisted)
       const { consent, ...inquiryData } = validationResult.data;
       const inquiry = await storage.createContactInquiry(inquiryData);
+      
+      // Send email notification to company
+      const companyEmail = "info@propertymasters.ca"; // Company notification email
+      try {
+        // Ensure all required fields have values for email template
+        const emailData = {
+          name: inquiryData.name,
+          email: inquiryData.email,
+          phone: inquiryData.phone ?? null,
+          message: inquiryData.message,
+          inquiryType: inquiryData.inquiryType ?? 'general'
+        };
+        await sendContactInquiryNotification(emailData, companyEmail);
+        console.log(`Contact inquiry notification sent to ${companyEmail}`);
+      } catch (emailError) {
+        console.error("Failed to send email notification:", emailError);
+        // Continue execution - don't fail the request if email fails
+      }
+      
       res.status(201).json({ message: "Contact inquiry submitted successfully", id: inquiry.id });
     } catch (error) {
       console.error("Error creating contact inquiry:", error);
