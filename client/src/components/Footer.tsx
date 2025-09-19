@@ -20,7 +20,6 @@ const footerSections = {
   ],
   company: [
     { title: 'Our Divisions', url: '/services' },
-    { title: 'Contact Us', url: '/contact' },
     { title: 'Privacy Policy', url: '/privacy' }
   ]
 };
@@ -128,25 +127,6 @@ export default function Footer() {
                 ))}
               </ul>
               
-              <div className="space-y-3">
-                <Button 
-                  className="w-full" 
-                  size="sm" 
-                  onClick={() => setContactModalOpen(true)}
-                  data-testid="button-footer-contact"
-                >
-                  Contact Us
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full" 
-                  size="sm" 
-                  onClick={() => setContactModalOpen(true)}
-                  data-testid="button-footer-schedule"
-                >
-                  Schedule Meeting
-                </Button>
-              </div>
             </div>
           </div>
           
