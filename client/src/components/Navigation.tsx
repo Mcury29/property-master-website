@@ -12,7 +12,6 @@ import logoImage from '@assets/E282EEC4-B02B-4D23-B1FB-FF01F386B9D2_175825015221
 import ContactModal from '@/components/ContactModal';
 
 const navigationItems = [
-  { title: 'Founder', url: '/founder' },
   { title: 'Home', url: '/' },
   { 
     title: 'Our Divisions', 
@@ -24,7 +23,8 @@ const navigationItems = [
       { title: 'Grounds', key: 'grounds', icon: Trees, url: '/services/grounds' }
     ]
   },
-  { title: 'Properties', url: '/properties' }
+  { title: 'Properties', url: '/properties' },
+  { title: 'Founder', url: '/founder' }
 ];
 
 export default function Navigation() {
