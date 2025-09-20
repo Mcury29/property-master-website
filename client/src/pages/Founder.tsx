@@ -273,8 +273,7 @@ export default function Founder() {
                 </h3>
                 <p className="text-muted-foreground">
                   Our company is proud to be family owned and operated, carrying forward the vision and values built by our founder, Denis LePage. 
-                  Today, the business is in the trusted hands of his wife, Carolyn LePage, along with their two daughters, Renée LePage and Nicole Beaudoin. 
-                  Together, they are dedicated to honoring Denis's legacy while continuing to provide the same level of trust, care, and commitment that 
+                  Together, we are dedicated to honoring Denis's legacy while continuing to provide the same level of trust, care, and commitment that 
                   has always defined our work.
                 </p>
               </motion.div>
