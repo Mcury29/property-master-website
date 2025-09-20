@@ -41,12 +41,6 @@ export default function Footer() {
                 </div>
               </Link>
               
-              <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
-                For over 25 years, Property Masters Group has been the trusted partner for property owners 
-                across Edmonton and surrounding area, providing integrated solutions for commercial real estate, 
-                maintenance, and grounds care.
-              </p>
-              
               <div className="space-y-3">
                 <div className="flex items-center space-x-3 text-sm">
                   <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
@@ -129,8 +123,19 @@ export default function Footer() {
             </div>
           </div>
           
+          {/* Company Description Section */}
+          <div className="mt-12 pt-8 border-t border-border">
+            <div className="text-center">
+              <p className="text-muted-foreground text-lg leading-relaxed max-w-4xl mx-auto">
+                For over 25 years, Property Masters Group has been the trusted partner for property owners 
+                across Edmonton and surrounding area, providing integrated solutions for commercial real estate, 
+                maintenance, and grounds care.
+              </p>
+            </div>
+          </div>
+          
           {/* Bottom Section */}
-          <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-muted-foreground mb-4 md:mb-0">
               © {new Date().getFullYear()} Property Masters Group of Companies. All rights reserved.
             </div>
