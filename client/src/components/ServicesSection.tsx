@@ -20,7 +20,7 @@ const services = [
     ],
     stats: { value: '450,000+', label: 'Sq Ft Managed' },
     highlight: 'Full-Service Management',
-    url: '/services/commercial-real-estate'
+    url: '/services/property-management'
   },
   {
     icon: Wrench,

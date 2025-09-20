@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -11,7 +11,6 @@ import Properties from "@/pages/Properties";
 import Contact from "@/pages/Contact";
 import Founder from "@/pages/Founder";
 import Privacy from "@/pages/Privacy";
-import CommercialRealEstate from "@/pages/services/CommercialRealEstate";
 import Maintenance from "@/pages/services/Maintenance";
 import Grounds from "@/pages/services/Grounds";
 import PropertyManagement from "@/pages/services/PropertyManagement";
@@ -26,7 +25,9 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/founder" component={Founder} />
       <Route path="/services" component={Services} />
-      <Route path="/services/commercial-real-estate" component={CommercialRealEstate} />
+      <Route path="/services/commercial-real-estate">
+        <Redirect to="/services/property-management" />
+      </Route>
       <Route path="/services/maintenance" component={Maintenance} />
       <Route path="/services/grounds" component={Grounds} />
       <Route path="/services/property-management" component={PropertyManagement} />
