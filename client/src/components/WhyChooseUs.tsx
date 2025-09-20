@@ -141,27 +141,28 @@ export default function WhyChooseUs() {
         
         {/* Feature Detail Modal */}
         {selectedFeature && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <motion.div 
-              className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+              className="bg-slate-900 border border-slate-700 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="sticky top-0 bg-white border-b p-6 flex items-center justify-between">
+              <div className="sticky top-0 bg-slate-900 border-b border-slate-700 p-6 flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <selectedFeature.icon className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center">
+                    <selectedFeature.icon className="w-6 h-6 text-cyan-400" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-foreground">{selectedFeature.title}</h3>
-                    <p className="text-sm text-muted-foreground">{selectedFeature.details.subtitle}</p>
+                    <h3 className="text-xl font-bold text-white">{selectedFeature.title}</h3>
+                    <p className="text-sm text-slate-300">{selectedFeature.details.subtitle}</p>
                   </div>
                 </div>
                 <Button 
                   variant="ghost" 
                   size="sm" 
                   onClick={() => setSelectedFeature(null)}
+                  className="text-slate-400 hover:text-white hover:bg-slate-800"
                   data-testid="button-close-modal"
                 >
                   <X className="w-5 h-5" />
@@ -169,16 +170,16 @@ export default function WhyChooseUs() {
               </div>
               
               <div className="p-6">
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-slate-300 mb-6 leading-relaxed">
                   {selectedFeature.details.content}
                 </p>
                 
-                <h4 className="text-lg font-semibold text-foreground mb-4">Key Advantages</h4>
+                <h4 className="text-lg font-semibold text-white mb-4">Key Advantages</h4>
                 <div className="space-y-3">
                   {selectedFeature.details.highlights.map((highlight: string, index: number) => (
                     <div key={index} className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-muted-foreground">{highlight}</span>
+                      <CheckCircle className="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-slate-300">{highlight}</span>
                     </div>
                   ))}
                 </div>
@@ -186,6 +187,7 @@ export default function WhyChooseUs() {
                 <div className="mt-8 flex justify-end">
                   <Button 
                     onClick={() => setSelectedFeature(null)}
+                    className="bg-cyan-500 hover:bg-cyan-600 text-white"
                     data-testid="button-close-modal-bottom"
                   >
                     Close

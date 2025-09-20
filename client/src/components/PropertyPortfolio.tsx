@@ -113,32 +113,32 @@ const PropertyCategory = ({ title, properties, icon: Icon, count }: {
                 </div>
                 
                 {/* Property Action Buttons */}
-                <div className="mt-6 pt-4 border-t border-border flex flex-col sm:flex-row gap-3">
+                <div className="mt-4 pt-3 border-t border-border/50 flex gap-2">
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="flex-1 group"
+                    className="flex-1 text-xs h-8"
                     onClick={() => {
                       // Handle connect to realtor action
                       window.open(`mailto:reception@propertymasters.ca?subject=Inquiry about ${property.name}&body=Hi, I'm interested in learning more about the property at ${property.address}.`, '_blank');
                     }}
                     data-testid={`button-connect-realtor-${property.id}`}
                   >
-                    <Phone className="w-4 h-4 mr-2" />
-                    Connect to Realtor
+                    <Phone className="w-3 h-3 mr-1" />
+                    Contact
                   </Button>
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="flex-1 group"
+                    className="flex-1 text-xs h-8"
                     onClick={() => {
                       // Handle view site map action - for now, show a placeholder
                       alert(`Site map for ${property.name} - Feature coming soon!`);
                     }}
                     data-testid={`button-view-sitemap-${property.id}`}
                   >
-                    <FileText className="w-4 h-4 mr-2" />
-                    View Site Map
+                    <FileText className="w-3 h-3 mr-1" />
+                    Site Map
                   </Button>
                 </div>
               </CardContent>
@@ -183,7 +183,7 @@ export default function PropertyPortfolio() {
             Property <span className="text-primary">Portfolio</span>
           </motion.h2>
           <motion.p 
-            className="text-lg text-muted-foreground max-w-3xl mx-auto mb-12"
+            className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8"
             variants={fadeInUp}
           >
             Our portfolio spans nearly half a million square feet of space across Alberta, 
@@ -211,7 +211,7 @@ export default function PropertyPortfolio() {
         <>
         <motion.div 
           ref={statsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
           variants={staggerContainer}
           initial="hidden"
           animate={statsInView ? "visible" : "hidden"}
