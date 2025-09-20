@@ -34,7 +34,7 @@ export default function PropertyManagement() {
               <div className="bg-primary p-3 rounded-lg">
                 <Building className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold">Property Management</h1>
+              <h1 className="text-4xl md:text-5xl font-bold">Commercial Property Management</h1>
             </motion.div>
             <motion.p className="text-xl text-slate-300 max-w-3xl mb-8" variants={fadeInLeft}>
               Comprehensive property management services that maximize your investment returns while 
