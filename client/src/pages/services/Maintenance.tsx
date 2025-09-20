@@ -62,7 +62,7 @@ export default function Maintenance() {
         {/* Hero Image Section */}
         <motion.section 
           ref={imageRef}
-          className="py-16 bg-slate-50"
+          className="py-16 bg-slate-800"
           variants={fadeInUp}
           initial="hidden"
           animate={imageInView ? "visible" : "hidden"}
