@@ -365,6 +365,17 @@ export default function PropertyManagement() {
             </motion.div>
           </motion.section>
         </div>
+        
+        {/* Company Legacy Section */}
+        <div className="bg-slate-800 py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p className="text-lg text-slate-300 leading-relaxed max-w-4xl mx-auto">
+              For over 25 years, Property Masters Group has been the trusted partner for property owners 
+              across Edmonton and surrounding area, providing integrated solutions for commercial real estate, 
+              maintenance, and grounds care.
+            </p>
+          </div>
+        </div>
       </div>
 
       <ContactModal 
