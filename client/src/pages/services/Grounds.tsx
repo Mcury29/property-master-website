@@ -12,8 +12,9 @@ export default function Grounds() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const { ref: heroRef, isInView: heroInView } = useScrollAnimation();
   const { ref: imageRef, isInView: imageInView } = useScrollAnimation();
-  const { ref: servicesRef, isInView: servicesInView } = useScrollAnimation();
-  const { ref: whyChooseRef, isInView: whyChooseInView } = useScrollAnimation();
+  const { ref: seasonalRef, isInView: seasonalInView } = useScrollAnimation();
+  const { ref: specializedRef, isInView: specializedInView } = useScrollAnimation();
+  const { ref: benefitsRef, isInView: benefitsInView } = useScrollAnimation();
   const { ref: ctaRef, isInView: ctaInView } = useScrollAnimation();
 
   return (
@@ -89,14 +90,23 @@ export default function Grounds() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {/* Seasonal Services */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-foreground mb-8">Year-Round Grounds Care</h2>
+          <motion.section 
+            ref={seasonalRef}
+            className="mb-16"
+            variants={staggerContainer}
+            initial="hidden"
+            animate={seasonalInView ? "visible" : "hidden"}
+          >
+            <motion.h2 className="text-3xl font-bold text-foreground mb-8" variants={fadeInUp}>
+              Year-Round Grounds Care
+            </motion.h2>
             <div className="grid md:grid-cols-2 gap-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Sun className="w-5 h-5 text-primary mr-3" />
-                    Spring & Summer Services
+              <motion.div variants={scaleIn}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Sun className="w-5 h-5 text-primary mr-3" />
+                      Spring & Summer Services
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -119,13 +129,15 @@ export default function Grounds() {
                     </li>
                   </ul>
                 </CardContent>
-              </Card>
+                </Card>
+              </motion.div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Snowflake className="w-5 h-5 text-primary mr-3" />
-                    Winter Services
+              <motion.div variants={scaleIn}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Snowflake className="w-5 h-5 text-primary mr-3" />
+                      Winter Services
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -149,14 +161,23 @@ export default function Grounds() {
                   </ul>
                 </CardContent>
               </Card>
+              </motion.div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Specialized Services */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-foreground mb-8">Specialized Grounds Services</h2>
+          <motion.section 
+            ref={specializedRef}
+            className="mb-16"
+            variants={staggerContainer}
+            initial="hidden"
+            animate={specializedInView ? "visible" : "hidden"}
+          >
+            <motion.h2 className="text-3xl font-bold text-foreground mb-8" variants={fadeInUp}>
+              Specialized Grounds Services
+            </motion.h2>
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
+              <motion.div className="text-center" variants={scaleIn}>
                 <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Droplets className="w-8 h-8 text-primary" />
                 </div>
@@ -165,8 +186,8 @@ export default function Grounds() {
                   Comprehensive cleaning including litter management, window washing, 
                   and maintaining clean, professional appearances.
                 </p>
-              </div>
-              <div className="text-center">
+              </motion.div>
+              <motion.div className="text-center" variants={scaleIn}>
                 <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Trees className="w-8 h-8 text-primary" />
                 </div>
@@ -175,8 +196,8 @@ export default function Grounds() {
                   Custom landscape planning and installation to enhance curb appeal 
                   and create welcoming outdoor spaces.
                 </p>
-              </div>
-              <div className="text-center">
+              </motion.div>
+              <motion.div className="text-center" variants={scaleIn}>
                 <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Sun className="w-8 h-8 text-primary" />
                 </div>
@@ -185,17 +206,26 @@ export default function Grounds() {
                   Complete seasonal transitions including fall cleanup, 
                   winter preparation, and spring restoration services.
                 </p>
-              </div>
+              </motion.div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Service Benefits */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-foreground mb-8">Why Professional Grounds Care Matters</h2>
+          <motion.section 
+            ref={benefitsRef}
+            className="mb-16"
+            variants={staggerContainer}
+            initial="hidden"
+            animate={benefitsInView ? "visible" : "hidden"}
+          >
+            <motion.h2 className="text-3xl font-bold text-foreground mb-8" variants={fadeInUp}>
+              Why Professional Grounds Care Matters
+            </motion.h2>
             <div className="grid md:grid-cols-2 gap-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Enhanced Property Value</CardTitle>
+              <motion.div variants={scaleIn}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Enhanced Property Value</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
@@ -209,11 +239,13 @@ export default function Grounds() {
                     <li>• Long-term asset protection</li>
                   </ul>
                 </CardContent>
-              </Card>
+                </Card>
+              </motion.div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Safety & Compliance</CardTitle>
+              <motion.div variants={scaleIn}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Safety & Compliance</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
@@ -227,20 +259,27 @@ export default function Grounds() {
                     <li>• Reduced liability risk</li>
                   </ul>
                 </CardContent>
-              </Card>
+                </Card>
+              </motion.div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Call to Action */}
-          <section className="bg-muted p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">
+          <motion.section 
+            ref={ctaRef}
+            className="bg-muted p-8 rounded-lg text-center"
+            variants={staggerContainer}
+            initial="hidden"
+            animate={ctaInView ? "visible" : "hidden"}
+          >
+            <motion.h2 className="text-2xl font-bold text-foreground mb-4" variants={fadeInUp}>
               Create Outstanding Outdoor Spaces
-            </h2>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p className="text-muted-foreground mb-6 max-w-2xl mx-auto" variants={fadeInUp}>
               Let us help you maintain beautiful, safe, and welcoming grounds year-round. 
               Our experienced team provides reliable service in all seasons and weather conditions.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            </motion.p>
+            <motion.div className="flex flex-col sm:flex-row gap-4 justify-center" variants={scaleIn}>
               <Button 
                 size="lg"
                 onClick={() => setContactModalOpen(true)}
@@ -256,8 +295,8 @@ export default function Grounds() {
               >
                 Seasonal Services
               </Button>
-            </div>
-          </section>
+            </motion.div>
+          </motion.section>
         </div>
       </div>
 
