@@ -1,27 +1,76 @@
-import { Shield, Users, Award } from 'lucide-react';
+import { useState } from 'react';
+import { Shield, Users, Award, MapPin, Building, Calendar, CheckCircle, X } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { motion } from 'motion/react';
 import { useScrollAnimation, fadeInUp, staggerContainer, scaleIn } from '@/hooks/useScrollAnimation';
+
+interface FeatureDetails {
+  subtitle: string;
+  content: string;
+  highlights: string[];
+}
+
+interface Feature {
+  icon: any;
+  title: string;
+  description: string;
+  details: FeatureDetails;
+}
 
 export default function WhyChooseUs() {
   const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
   const { ref: cardsRef, isInView: cardsInView } = useScrollAnimation();
+  const [selectedFeature, setSelectedFeature] = useState<Feature | null>(null);
   
   const features = [
     {
       icon: Shield,
       title: 'Locally Owned & Operated',
-      description: 'Deep understanding of Alberta\'s commercial property landscape and local market conditions.'
+      description: 'Deep understanding of Alberta\'s commercial property landscape and local market conditions.',
+      details: {
+        subtitle: 'Rooted in Alberta for Over 25 Years',
+        content: 'As a family-owned business established in Alberta, we bring unmatched local knowledge and community commitment to every project.',
+        highlights: [
+          'Intimate knowledge of Edmonton and surrounding area markets',
+          'Understanding of local regulations, zoning, and permit processes',
+          'Established relationships with local contractors and suppliers',
+          'Weather-specific maintenance and grounds keeping expertise',
+          'Community-focused approach with local decision making'
+        ]
+      }
     },
     {
       icon: Users,
       title: 'Integrated Group of Companies',
-      description: 'One-stop solutions across property management, grounds maintenance, and building care.'
+      description: 'One-stop solutions across property management, grounds maintenance, and building care.',
+      details: {
+        subtitle: 'Complete Property Solutions Under One Roof',
+        content: 'Our integrated approach eliminates the complexity of managing multiple vendors, providing seamless coordination across all property needs.',
+        highlights: [
+          'Single point of contact for all property services',
+          'Coordinated scheduling reduces disruption to tenants',
+          'Streamlined communication and reporting',
+          'Cost efficiencies through integrated service delivery',
+          'Consistent quality standards across all service divisions'
+        ]
+      }
     },
     {
       icon: Award,
       title: 'Proven Track Record',
-      description: 'Established expertise in both commercial and residential property management with satisfied clients.'
+      description: 'Established expertise in both commercial and residential property management with satisfied clients.',
+      details: {
+        subtitle: 'Excellence Demonstrated Through Results',
+        content: 'Our decades of experience and consistently high client retention rates speak to our commitment to quality and reliability.',
+        highlights: [
+          'Over 450,000 square feet of commercial space managed',
+          'High client retention and satisfaction rates',
+          'Proven emergency response and crisis management',
+          'Track record of maintaining property values and occupancy',
+          'Long-term partnerships with major commercial property owners'
+        ]
+      }
     }
   ];
 
@@ -60,7 +109,11 @@ export default function WhyChooseUs() {
             const Icon = feature.icon;
             return (
               <motion.div key={index} variants={scaleIn}>
-                <Card className="bg-slate-800/50 border-slate-700 text-center p-8 hover-elevate h-full">
+                <Card 
+                  className="bg-slate-800/50 border-slate-700 text-center p-8 hover-elevate h-full cursor-pointer transition-all duration-300 hover:bg-slate-800/70"
+                  onClick={() => setSelectedFeature(feature)}
+                  data-testid={`card-feature-${index}`}
+                >
                   <CardContent className="space-y-6">
                     <div className="mx-auto w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center">
                       <Icon className="w-8 h-8 text-white" />
@@ -71,12 +124,77 @@ export default function WhyChooseUs() {
                     <p className="text-slate-300 leading-relaxed">
                       {feature.description}
                     </p>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="mt-4 border-cyan-500 text-cyan-500 hover:bg-cyan-500 hover:text-white"
+                      data-testid={`button-learn-more-${index}`}
+                    >
+                      Learn More
+                    </Button>
                   </CardContent>
                 </Card>
               </motion.div>
             );
           })}
         </motion.div>
+        
+        {/* Feature Detail Modal */}
+        {selectedFeature && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <motion.div 
+              className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="sticky top-0 bg-white border-b p-6 flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <selectedFeature.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-foreground">{selectedFeature.title}</h3>
+                    <p className="text-sm text-muted-foreground">{selectedFeature.details.subtitle}</p>
+                  </div>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => setSelectedFeature(null)}
+                  data-testid="button-close-modal"
+                >
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
+              
+              <div className="p-6">
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  {selectedFeature.details.content}
+                </p>
+                
+                <h4 className="text-lg font-semibold text-foreground mb-4">Key Advantages</h4>
+                <div className="space-y-3">
+                  {selectedFeature.details.highlights.map((highlight: string, index: number) => (
+                    <div key={index} className="flex items-start space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-muted-foreground">{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-8 flex justify-end">
+                  <Button 
+                    onClick={() => setSelectedFeature(null)}
+                    data-testid="button-close-modal-bottom"
+                  >
+                    Close
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
       </div>
     </section>
   );

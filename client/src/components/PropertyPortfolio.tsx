@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Building, MapPin, Users, TrendingUp, ShoppingBag, Briefcase, Home } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Building, MapPin, Users, TrendingUp, ShoppingBag, Briefcase, Home, Phone, FileText } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import type { Property } from '@shared/schema';
 import { motion } from 'motion/react';
@@ -109,6 +110,36 @@ const PropertyCategory = ({ title, properties, icon: Icon, count }: {
                       </span>
                     </div>
                   )}
+                </div>
+                
+                {/* Property Action Buttons */}
+                <div className="mt-6 pt-4 border-t border-border flex flex-col sm:flex-row gap-3">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1 group"
+                    onClick={() => {
+                      // Handle connect to realtor action
+                      window.open(`mailto:reception@propertymasters.ca?subject=Inquiry about ${property.name}&body=Hi, I'm interested in learning more about the property at ${property.address}.`, '_blank');
+                    }}
+                    data-testid={`button-connect-realtor-${property.id}`}
+                  >
+                    <Phone className="w-4 h-4 mr-2" />
+                    Connect to Realtor
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1 group"
+                    onClick={() => {
+                      // Handle view site map action - for now, show a placeholder
+                      alert(`Site map for ${property.name} - Feature coming soon!`);
+                    }}
+                    data-testid={`button-view-sitemap-${property.id}`}
+                  >
+                    <FileText className="w-4 h-4 mr-2" />
+                    View Site Map
+                  </Button>
                 </div>
               </CardContent>
             </Card>

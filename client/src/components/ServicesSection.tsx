@@ -1,9 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Building, Wrench, Trees, ArrowRight } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Building, Wrench, Trees, ArrowRight, Star, Clock, Users } from 'lucide-react';
 import { Link } from 'wouter';
 import { motion } from 'motion/react';
-import { useScrollAnimation, fadeInUp, staggerContainer, scaleIn } from '@/hooks/useScrollAnimation';
+import { useScrollAnimation, fadeInUp, staggerContainer, scaleIn, fadeInLeft, fadeInRight } from '@/hooks/useScrollAnimation';
+import modernOfficeImage from '@assets/stock_images/modern_office_buildi_6ba1581a.jpg';
 
 const services = [
   {
@@ -16,24 +18,28 @@ const services = [
       'Strategic property positioning and optimization',
       'Regulatory compliance and risk management'
     ],
+    stats: { value: '450,000+', label: 'Sq Ft Managed' },
+    highlight: 'Full-Service Management',
     url: '/services/commercial-real-estate'
   },
   {
     icon: Wrench,
     title: 'Maintenance Services',
-    description: 'We keep buildings performing at their best through proactive and reliable care.',
+    description: 'We keep buildings performing at their best through proactive and reliable care, extending asset life and reducing long-term costs.',
     features: [
       'Painting, signage, and tenant improvements',
       'Interior and exterior repair solutions',
       'Plumbing & quarterly HVAC preventative maintenance',
       'Ongoing building upkeep'
     ],
+    stats: { value: '24/7', label: 'Emergency Response' },
+    highlight: 'Preventative Focus',
     url: '/services/maintenance'
   },
   {
     icon: Trees,
     title: 'Grounds Keeping',
-    description: 'Our grounds division ensures properties are safe, sharp, and welcoming throughout the year.',
+    description: 'Our grounds division ensures properties are safe, sharp, and welcoming throughout the year, creating lasting positive impressions.',
     features: [
       'Turf care and seasonal landscaping',
       'Snow removal and ice control',
@@ -41,6 +47,8 @@ const services = [
       'Window washing',
       'Site detailing and litter management'
     ],
+    stats: { value: '365', label: 'Days Coverage' },
+    highlight: 'Year-Round Care',
     url: '/services/grounds'
   }
 ];
@@ -67,12 +75,25 @@ export default function ServicesSection() {
             Our <span className="text-primary">Services</span>
           </motion.h2>
           <motion.p 
-            className="text-lg text-muted-foreground max-w-3xl mx-auto"
+            className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8"
             variants={fadeInUp}
           >
             With more than 25 years in commercial real estate, maintenance, and grounds keeping, 
             we've developed a reputation for reliability, quality, and community connection.
           </motion.p>
+          <motion.div 
+            className="flex justify-center mb-8"
+            variants={fadeInUp}
+          >
+            <div className="relative rounded-lg overflow-hidden shadow-lg max-w-2xl">
+              <img 
+                src={modernOfficeImage}
+                alt="Professional commercial property management services"
+                className="w-full h-48 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"></div>
+            </div>
+          </motion.div>
         </motion.div>
 
         <motion.div 
@@ -88,17 +109,28 @@ export default function ServicesSection() {
               <motion.div key={index} variants={scaleIn}>
                 <Card className="hover-elevate transition-all duration-300 h-full">
                   <CardHeader>
-                    <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                      <IconComponent className="w-8 h-8 text-primary" />
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center">
+                        <IconComponent className="w-8 h-8 text-primary" />
+                      </div>
+                      <Badge variant="secondary" className="text-xs font-medium">
+                        {service.highlight}
+                      </Badge>
                     </div>
-                    <CardTitle className="text-xl font-semibold text-foreground">{service.title}</CardTitle>
+                    <CardTitle className="text-xl font-semibold text-foreground mb-2">{service.title}</CardTitle>
+                    <div className="flex items-center space-x-2 mb-4">
+                      <div className="bg-primary/5 px-3 py-1 rounded-full">
+                        <span className="text-lg font-bold text-primary">{service.stats.value}</span>
+                        <span className="text-xs text-muted-foreground ml-1">{service.stats.label}</span>
+                      </div>
+                    </div>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground mb-6">{service.description}</p>
                     <ul className="space-y-3 mb-8">
                       {service.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start space-x-2">
-                          <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                          <Star className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-muted-foreground">{feature}</span>
                         </li>
                       ))}
