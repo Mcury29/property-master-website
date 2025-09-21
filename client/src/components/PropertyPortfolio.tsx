@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Building, MapPin, Users, TrendingUp, ShoppingBag, Briefcase, Home, Phone, FileText, X } from 'lucide-react';
+import { Building, MapPin, Users, TrendingUp, ShoppingBag, Briefcase, Home, FileText, X } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import type { Property } from '@shared/schema';
 import { motion } from 'motion/react';
@@ -192,33 +192,20 @@ const PropertyCategory = ({ title, properties, icon: Icon, count, onSiteMapClick
                 </div>
                 
                 {/* Property Action Buttons */}
-                <div className="mt-4 pt-3 border-t border-border/50 flex gap-2">
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className={`text-xs h-8 ${siteMapImages[property.name] ? 'flex-1' : 'w-full'}`}
-                    onClick={() => {
-                      // Handle connect to realtor action
-                      window.open(`mailto:reception@propertymasters.ca?subject=Inquiry about ${property.name}&body=Hi, I'm interested in learning more about the property at ${property.address}.`, '_blank');
-                    }}
-                    data-testid={`button-connect-realtor-${property.id}`}
-                  >
-                    <Phone className="w-3 h-3 mr-1" />
-                    Contact
-                  </Button>
-                  {siteMapImages[property.name] && (
+                {siteMapImages[property.name] && (
+                  <div className="mt-4 pt-3 border-t border-border/50">
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="flex-1 text-xs h-8"
+                      className="w-full text-xs h-8"
                       onClick={() => onSiteMapClick(property)}
                       data-testid={`button-view-sitemap-${property.id}`}
                     >
                       <FileText className="w-3 h-3 mr-1" />
                       Site Map
                     </Button>
-                  )}
-                </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
             </motion.div>
@@ -446,33 +433,20 @@ export default function PropertyPortfolio() {
                         </div>
                         
                         {/* Property Action Buttons */}
-                        <div className="mt-4 pt-3 border-t border-border/50 flex gap-2">
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className={`text-xs h-8 ${siteMapImages[property.name] ? 'flex-1' : 'w-full'}`}
-                            onClick={() => {
-                              // Handle connect to realtor action
-                              window.open(`mailto:reception@propertymasters.ca?subject=Inquiry about ${property.name}&body=Hi, I'm interested in learning more about the property at ${property.address}.`, '_blank');
-                            }}
-                            data-testid={`button-connect-realtor-${property.id}`}
-                          >
-                            <Phone className="w-3 h-3 mr-1" />
-                            Contact
-                          </Button>
-                          {siteMapImages[property.name] && (
+                        {siteMapImages[property.name] && (
+                          <div className="mt-4 pt-3 border-t border-border/50">
                             <Button 
                               variant="outline" 
                               size="sm" 
-                              className="flex-1 text-xs h-8"
+                              className="w-full text-xs h-8"
                               onClick={() => handleSiteMapClick(property)}
                               data-testid={`button-view-sitemap-${property.id}`}
                             >
                               <FileText className="w-3 h-3 mr-1" />
                               Site Map
                             </Button>
-                          )}
-                        </div>
+                          </div>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
