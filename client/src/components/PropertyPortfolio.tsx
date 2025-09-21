@@ -196,7 +196,7 @@ const PropertyCategory = ({ title, properties, icon: Icon, count, onSiteMapClick
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="flex-1 text-xs h-8"
+                    className={`text-xs h-8 ${siteMapImages[property.name] ? 'flex-1' : 'w-full'}`}
                     onClick={() => {
                       // Handle connect to realtor action
                       window.open(`mailto:reception@propertymasters.ca?subject=Inquiry about ${property.name}&body=Hi, I'm interested in learning more about the property at ${property.address}.`, '_blank');
@@ -206,16 +206,18 @@ const PropertyCategory = ({ title, properties, icon: Icon, count, onSiteMapClick
                     <Phone className="w-3 h-3 mr-1" />
                     Contact
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="flex-1 text-xs h-8"
-                    onClick={() => onSiteMapClick(property)}
-                    data-testid={`button-view-sitemap-${property.id}`}
-                  >
-                    <FileText className="w-3 h-3 mr-1" />
-                    Site Map
-                  </Button>
+                  {siteMapImages[property.name] && (
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1 text-xs h-8"
+                      onClick={() => onSiteMapClick(property)}
+                      data-testid={`button-view-sitemap-${property.id}`}
+                    >
+                      <FileText className="w-3 h-3 mr-1" />
+                      Site Map
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
