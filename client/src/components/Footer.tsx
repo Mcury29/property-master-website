@@ -12,9 +12,6 @@ const footerSections = {
     { title: 'Grounds Keeping', url: '/services/grounds' }
   ],
   properties: [
-    { title: 'Office & Professional', url: '/properties/office' },
-    { title: 'Strip Centres', url: '/properties/strip-centres' },
-    { title: 'Residential & Mixed-Use', url: '/properties/residential' },
     { title: 'Portfolio Overview', url: '/properties' }
   ],
   company: [
