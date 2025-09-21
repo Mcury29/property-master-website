@@ -25,6 +25,7 @@ import soperBuildingSiteMap from '@assets/IMG_9616_1758414977824.jpeg';
 import wainwrightCrossingSiteMap from '@assets/IMG_9617_1758415057119.jpeg';
 import winningtonBuildingSiteMap from '@assets/IMG_9618_1758415150170.jpeg';
 import winningtonBuildingSiteMap2 from '@assets/IMG_9619_1758415297133.jpeg';
+import woodbridgeGardensSiteMap from '@assets/IMG_9620_1758415461898.jpeg';
 
 // Site map mapping based on property names - supports single image or array of images
 const siteMapImages: Record<string, string | string[]> = {
@@ -42,6 +43,7 @@ const siteMapImages: Record<string, string | string[]> = {
   'Soper Building': soperBuildingSiteMap,
   'Wainwright Crossing': wainwrightCrossingSiteMap,
   'Winnington Building': [winningtonBuildingSiteMap, winningtonBuildingSiteMap2],
+  'Woodbridge Gardens': woodbridgeGardensSiteMap,
 };
 
 // Calculate portfolio stats from real property data
