@@ -241,6 +241,7 @@ export default function PropertyPortfolio() {
 
   const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
   const { ref: statsRef, isInView: statsInView } = useScrollAnimation();
+  const { ref: propertiesRef, isInView: propertiesInView } = useScrollAnimation();
 
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat().format(num);
@@ -375,10 +376,11 @@ export default function PropertyPortfolio() {
 
         {/* All Properties in Single Grid */}
         <motion.div 
+          ref={propertiesRef}
           className="mb-16"
           variants={staggerContainer}
           initial="hidden"
-          animate="visible"
+          animate={propertiesInView ? "visible" : "hidden"}
         >
           <motion.div className="flex items-center gap-3 mb-6" variants={fadeInLeft}>
             <div className="bg-primary/10 p-2 rounded-lg">
@@ -390,7 +392,12 @@ export default function PropertyPortfolio() {
             </div>
           </motion.div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            animate={propertiesInView ? "visible" : "hidden"}
+          >
             {properties.map((property) => {
               const occupancyRate = parseFloat(((property.occupiedSF / property.totalSF) * 100).toFixed(1));
               return (
@@ -484,7 +491,7 @@ export default function PropertyPortfolio() {
                 </motion.div>
               );
               })}
-          </div>
+          </motion.div>
         </motion.div>
         
         {/* Empty state for no properties */}
