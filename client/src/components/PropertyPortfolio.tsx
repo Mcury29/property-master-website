@@ -18,6 +18,7 @@ import centre34SiteMap from '@assets/IMG_9609_1758414163649.jpeg';
 import hansProfessionalSiteMap from '@assets/IMG_9610_1758414236364.jpeg';
 import hintonLandSiteMap from '@assets/IMG_9611_1758414360649.jpeg';
 import millwoodsMainstreetSiteMap from '@assets/IMG_9612_1758414508315.jpeg';
+import natashaManorSiteMap from '@assets/IMG_9613_1758414622895.jpeg';
 
 // Site map mapping based on property names - will be populated as images are provided
 const siteMapImages: Record<string, string> = {
@@ -29,6 +30,7 @@ const siteMapImages: Record<string, string> = {
   'Hans Professional Centre': hansProfessionalSiteMap,
   'Hinton Land': hintonLandSiteMap,
   'Millwoods Mainstreet': millwoodsMainstreetSiteMap,
+  'Natasha Manor': natashaManorSiteMap,
 };
 
 // Calculate portfolio stats from real property data
