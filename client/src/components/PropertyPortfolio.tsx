@@ -24,9 +24,10 @@ import sherwoodParkPlazaSiteMap from '@assets/IMG_9615_1758414872723.jpeg';
 import soperBuildingSiteMap from '@assets/IMG_9616_1758414977824.jpeg';
 import wainwrightCrossingSiteMap from '@assets/IMG_9617_1758415057119.jpeg';
 import winningtonBuildingSiteMap from '@assets/IMG_9618_1758415150170.jpeg';
+import winningtonBuildingSiteMap2 from '@assets/IMG_9619_1758415297133.jpeg';
 
-// Site map mapping based on property names - will be populated as images are provided
-const siteMapImages: Record<string, string> = {
+// Site map mapping based on property names - supports single image or array of images
+const siteMapImages: Record<string, string | string[]> = {
   'Argyll Shopping Centre': argyllShoppingSiteMap,
   'Brentwood Building': brentwoodBuildingSiteMap,
   'Broadmoor Baseline Crossing': broadmoorBaselineSiteMap,
@@ -40,7 +41,7 @@ const siteMapImages: Record<string, string> = {
   'Sherwood Park Plaza': sherwoodParkPlazaSiteMap,
   'Soper Building': soperBuildingSiteMap,
   'Wainwright Crossing': wainwrightCrossingSiteMap,
-  'Winnington Building': winningtonBuildingSiteMap,
+  'Winnington Building': [winningtonBuildingSiteMap, winningtonBuildingSiteMap2],
 };
 
 // Calculate portfolio stats from real property data
@@ -67,26 +68,33 @@ const SiteMapModal = ({ isOpen, onClose, propertyName, siteMapUrl }: {
   isOpen: boolean;
   onClose: () => void;
   propertyName: string;
-  siteMapUrl?: string;
+  siteMapUrl?: string | string[];
 }) => {
   if (!siteMapUrl) return null;
   
+  // Convert to array for consistent handling
+  const imageUrls = Array.isArray(siteMapUrl) ? siteMapUrl : [siteMapUrl];
+  
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] p-0">
+      <DialogContent className="max-w-5xl max-h-[90vh] p-0">
         <DialogHeader className="p-6 pb-2">
           <DialogTitle className="text-xl font-semibold text-foreground">
-            {propertyName} - Site Map
+            {propertyName} - Site Map{imageUrls.length > 1 ? 's' : ''}
           </DialogTitle>
         </DialogHeader>
         <div className="px-6 pb-6">
-          <div className="relative bg-muted rounded-lg overflow-hidden">
-            <img 
-              src={siteMapUrl} 
-              alt={`Site map for ${propertyName}`}
-              className="w-full h-auto max-h-[70vh] object-contain"
-              data-testid={`img-sitemap-${propertyName.toLowerCase().replace(/\s+/g, '-')}`}
-            />
+          <div className="space-y-4">
+            {imageUrls.map((url, index) => (
+              <div key={index} className="relative bg-muted rounded-lg overflow-hidden">
+                <img 
+                  src={url} 
+                  alt={`Site map ${imageUrls.length > 1 ? `${index + 1} ` : ''}for ${propertyName}`}
+                  className="w-full h-auto max-h-[60vh] object-contain"
+                  data-testid={`img-sitemap-${propertyName.toLowerCase().replace(/\s+/g, '-')}${imageUrls.length > 1 ? `-${index + 1}` : ''}`}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </DialogContent>
