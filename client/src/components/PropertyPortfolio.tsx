@@ -373,30 +373,119 @@ export default function PropertyPortfolio() {
           </motion.div>
         </motion.div>
 
-        {/* Categorized Properties */}
-        <PropertyCategory 
-          title="Shopping Centers & Retail" 
-          properties={categorizedProperties.retail}
-          icon={ShoppingBag}
-          count={categorizedProperties.retail.length}
-          onSiteMapClick={handleSiteMapClick}
-        />
-        
-        <PropertyCategory 
-          title="Professional & Office Buildings" 
-          properties={categorizedProperties.office}
-          icon={Briefcase}
-          count={categorizedProperties.office.length}
-          onSiteMapClick={handleSiteMapClick}
-        />
-        
-        <PropertyCategory 
-          title="Mixed Use & Special Properties" 
-          properties={categorizedProperties.mixedUse}
-          icon={Home}
-          count={categorizedProperties.mixedUse.length}
-          onSiteMapClick={handleSiteMapClick}
-        />
+        {/* All Properties in Single Grid */}
+        <motion.div 
+          className="mb-16"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div className="flex items-center gap-3 mb-6" variants={fadeInLeft}>
+            <div className="bg-primary/10 p-2 rounded-lg">
+              <Building className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold text-foreground">All Properties</h3>
+              <p className="text-muted-foreground">{properties.length} {properties.length === 1 ? 'property' : 'properties'}</p>
+            </div>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {properties.map((property) => {
+              const occupancyRate = parseFloat(((property.occupiedSF / property.totalSF) * 100).toFixed(1));
+              return (
+                <motion.div key={property.id} variants={scaleIn}>
+                  <Card className="hover-elevate transition-all duration-300" data-testid={`card-property-${property.id}`}>
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <CardTitle className="text-lg font-semibold text-foreground mb-2">
+                            {property.name}
+                          </CardTitle>
+                          <div className="flex items-center text-sm text-muted-foreground mb-3">
+                            <MapPin className="w-4 h-4 mr-1" />
+                            {property.address}
+                          </div>
+                        </div>
+                        <Badge 
+                          variant={occupancyRate === 100 ? 'default' : occupancyRate >= 90 ? 'secondary' : 'destructive'}
+                          className="ml-2"
+                          data-testid={`badge-occupancy-${property.id}`}
+                        >
+                          {occupancyRate}% Occupied
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-1 gap-4 text-sm">
+                          <div className="flex flex-col">
+                            <span className="text-muted-foreground">Property Type</span>
+                            <span className="font-medium capitalize" data-testid={`text-type-${property.id}`}>
+                              {property.propertyType}
+                            </span>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-2 pt-2 border-t border-border/50">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-muted-foreground">Total Size:</span>
+                            <span className="font-medium" data-testid={`text-total-sf-${property.id}`}>
+                              {new Intl.NumberFormat().format(property.totalSF)} sf
+                            </span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-muted-foreground">Occupied:</span>
+                            <span className="font-medium text-green-600" data-testid={`text-occupied-sf-${property.id}`}>
+                              {new Intl.NumberFormat().format(property.occupiedSF)} sf
+                            </span>
+                          </div>
+                          {property.vacantSF > 0 && (
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm text-muted-foreground">Available:</span>
+                              <span className="font-medium text-yellow-600" data-testid={`text-vacant-sf-${property.id}`}>
+                                {new Intl.NumberFormat().format(property.vacantSF)} sf
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Property Action Buttons */}
+                        <div className="mt-4 pt-3 border-t border-border/50 flex gap-2">
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className={`text-xs h-8 ${siteMapImages[property.name] ? 'flex-1' : 'w-full'}`}
+                            onClick={() => {
+                              // Handle connect to realtor action
+                              window.open(`mailto:reception@propertymasters.ca?subject=Inquiry about ${property.name}&body=Hi, I'm interested in learning more about the property at ${property.address}.`, '_blank');
+                            }}
+                            data-testid={`button-connect-realtor-${property.id}`}
+                          >
+                            <Phone className="w-3 h-3 mr-1" />
+                            Contact
+                          </Button>
+                          {siteMapImages[property.name] && (
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="flex-1 text-xs h-8"
+                              onClick={() => handleSiteMapClick(property)}
+                              data-testid={`button-view-sitemap-${property.id}`}
+                            >
+                              <FileText className="w-3 h-3 mr-1" />
+                              Site Map
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+              })}
+          </div>
+        </motion.div>
         
         {/* Empty state for no properties */}
         {properties.length === 0 && (
