@@ -1,11 +1,51 @@
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Building, MapPin, Users, TrendingUp, ShoppingBag, Briefcase, Home, Phone, FileText } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Building, MapPin, Users, TrendingUp, ShoppingBag, Briefcase, Home, Phone, FileText, X } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import type { Property } from '@shared/schema';
 import { motion } from 'motion/react';
 import { useScrollAnimation, fadeInUp, staggerContainer, scaleIn, fadeInLeft } from '@/hooks/useScrollAnimation';
+
+// Import site map images
+import siteMap1 from '@assets/IMG_9605_1758412794644.jpeg';
+import siteMap2 from '@assets/IMG_9606_1758412794643.jpeg';
+import siteMap3 from '@assets/IMG_9607_1758412794643.jpeg';
+import siteMap4 from '@assets/IMG_9608_1758412794644.jpeg';
+import siteMap5 from '@assets/IMG_9609_1758412794644.jpeg';
+import siteMap6 from '@assets/IMG_9610_1758412794644.jpeg';
+import siteMap7 from '@assets/IMG_9611_1758412794643.jpeg';
+import siteMap8 from '@assets/IMG_9612_1758412794643.jpeg';
+import siteMap9 from '@assets/IMG_9613_1758412794643.jpeg';
+import siteMap10 from '@assets/IMG_9614_1758412794643.jpeg';
+import siteMap11 from '@assets/IMG_9615_1758412794643.jpeg';
+import siteMap12 from '@assets/IMG_9616_1758412794642.jpeg';
+import siteMap13 from '@assets/IMG_9617_1758412794642.jpeg';
+import siteMap14 from '@assets/IMG_9618_1758412794642.jpeg';
+import siteMap15 from '@assets/IMG_9619_1758412794642.jpeg';
+import siteMap16 from '@assets/IMG_9620_1758412794641.jpeg';
+
+// Site map mapping based on property names
+const siteMapImages: Record<string, string> = {
+  'Argyll Shopping Centre': siteMap1,
+  'Castledowns Shopping Centre': siteMap2,
+  'No Frills': siteMap3,
+  'Millwoods Mainstreet': siteMap4,
+  'Sherwood Park Plaza': siteMap5,
+  'Wainwright Crossing': siteMap6,
+  'Wild Rose Square': siteMap7,
+  'Broadmoor Baseline Crossing': siteMap8,
+  'Brentwood Building': siteMap9,
+  'Normed Professional Centre': siteMap10,
+  'Centre 34': siteMap11,
+  'Hans Professional Centre': siteMap12,
+  'AHS Project': siteMap13,
+  'Soper Building': siteMap14,
+  'Winnington Building': siteMap15,
+  'Natasha Manor': siteMap16,
+};
 
 // Calculate portfolio stats from real property data
 const calculatePortfolioStats = (properties: Property[]) => {
@@ -26,12 +66,45 @@ const categorizeProperties = (properties: Property[]) => {
   return { retail, office, mixedUse };
 };
 
+// Site Map Modal Component
+const SiteMapModal = ({ isOpen, onClose, propertyName, siteMapUrl }: {
+  isOpen: boolean;
+  onClose: () => void;
+  propertyName: string;
+  siteMapUrl?: string;
+}) => {
+  if (!siteMapUrl) return null;
+  
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-4xl max-h-[90vh] p-0">
+        <DialogHeader className="p-6 pb-2">
+          <DialogTitle className="text-xl font-semibold text-foreground">
+            {propertyName} - Site Map
+          </DialogTitle>
+        </DialogHeader>
+        <div className="px-6 pb-6">
+          <div className="relative bg-muted rounded-lg overflow-hidden">
+            <img 
+              src={siteMapUrl} 
+              alt={`Site map for ${propertyName}`}
+              className="w-full h-auto max-h-[70vh] object-contain"
+              data-testid={`img-sitemap-${propertyName.toLowerCase().replace(/\s+/g, '-')}`}
+            />
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 // Property Category Component
-const PropertyCategory = ({ title, properties, icon: Icon, count }: { 
+const PropertyCategory = ({ title, properties, icon: Icon, count, onSiteMapClick }: { 
   title: string; 
   properties: Property[]; 
   icon: any; 
   count: number;
+  onSiteMapClick: (property: Property) => void;
 }) => {
   const { ref, isInView } = useScrollAnimation();
   const formatNumber = (num: number) => {
@@ -131,10 +204,7 @@ const PropertyCategory = ({ title, properties, icon: Icon, count }: {
                     variant="outline" 
                     size="sm" 
                     className="flex-1 text-xs h-8"
-                    onClick={() => {
-                      // Handle view site map action - for now, show a placeholder
-                      alert(`Site map for ${property.name} - Feature coming soon!`);
-                    }}
+                    onClick={() => onSiteMapClick(property)}
                     data-testid={`button-view-sitemap-${property.id}`}
                   >
                     <FileText className="w-3 h-3 mr-1" />
@@ -152,6 +222,10 @@ const PropertyCategory = ({ title, properties, icon: Icon, count }: {
 };
 
 export default function PropertyPortfolio() {
+  // Site map modal state
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const [siteMapModalOpen, setSiteMapModalOpen] = useState(false);
+
   // Fetch properties from API
   const { data: properties = [], isLoading, isError } = useQuery<Property[]>({
     queryKey: ['/api/properties']
@@ -165,6 +239,16 @@ export default function PropertyPortfolio() {
   };
 
   const categorizedProperties = categorizeProperties(properties);
+
+  const handleSiteMapClick = (property: Property) => {
+    setSelectedProperty(property);
+    setSiteMapModalOpen(true);
+  };
+
+  const handleCloseSiteMap = () => {
+    setSiteMapModalOpen(false);
+    setSelectedProperty(null);
+  };
 
   return (
     <section className="py-24 bg-card">
@@ -287,6 +371,7 @@ export default function PropertyPortfolio() {
           properties={categorizedProperties.retail}
           icon={ShoppingBag}
           count={categorizedProperties.retail.length}
+          onSiteMapClick={handleSiteMapClick}
         />
         
         <PropertyCategory 
@@ -294,6 +379,7 @@ export default function PropertyPortfolio() {
           properties={categorizedProperties.office}
           icon={Briefcase}
           count={categorizedProperties.office.length}
+          onSiteMapClick={handleSiteMapClick}
         />
         
         <PropertyCategory 
@@ -301,6 +387,7 @@ export default function PropertyPortfolio() {
           properties={categorizedProperties.mixedUse}
           icon={Home}
           count={categorizedProperties.mixedUse.length}
+          onSiteMapClick={handleSiteMapClick}
         />
         
         {/* Empty state for no properties */}
@@ -312,6 +399,14 @@ export default function PropertyPortfolio() {
         </>
         )}
       </div>
+      
+      {/* Site Map Modal */}
+      <SiteMapModal 
+        isOpen={siteMapModalOpen}
+        onClose={handleCloseSiteMap}
+        propertyName={selectedProperty?.name || ''}
+        siteMapUrl={selectedProperty ? siteMapImages[selectedProperty.name] : undefined}
+      />
     </section>
   );
 }
