@@ -21,6 +21,7 @@ import millwoodsMainstreetSiteMap from '@assets/IMG_9612_1758414508315.jpeg';
 import natashaManorSiteMap from '@assets/IMG_9613_1758414622895.jpeg';
 import plaza127WarehouseSiteMap from '@assets/IMG_9614_1758414726907.jpeg';
 import sherwoodParkPlazaSiteMap from '@assets/IMG_9615_1758414872723.jpeg';
+import soperBuildingSiteMap from '@assets/IMG_9616_1758414977824.jpeg';
 
 // Site map mapping based on property names - will be populated as images are provided
 const siteMapImages: Record<string, string> = {
@@ -35,6 +36,7 @@ const siteMapImages: Record<string, string> = {
   'Natasha Manor': natashaManorSiteMap,
   'Plaza 127 & Warehouse 127': plaza127WarehouseSiteMap,
   'Sherwood Park Plaza': sherwoodParkPlazaSiteMap,
+  'Soper Building': soperBuildingSiteMap,
 };
 
 // Calculate portfolio stats from real property data
