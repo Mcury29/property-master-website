@@ -241,7 +241,6 @@ export default function PropertyPortfolio() {
 
   const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
   const { ref: statsRef, isInView: statsInView } = useScrollAnimation();
-  const { ref: propertiesRef, isInView: propertiesInView } = useScrollAnimation();
 
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat().format(num);
@@ -375,13 +374,8 @@ export default function PropertyPortfolio() {
         </motion.div>
 
         {/* All Properties in Single Grid */}
-        <div ref={propertiesRef} className="mb-16">
-          <motion.div 
-            className="flex items-center gap-3 mb-6" 
-            variants={fadeInLeft}
-            initial="hidden"
-            animate={propertiesInView ? "visible" : "hidden"}
-          >
+        <div className="mb-16">
+          <div className="flex items-center gap-3 mb-6">
             <div className="bg-primary/10 p-2 rounded-lg">
               <Building className="w-6 h-6 text-primary" />
             </div>
@@ -389,18 +383,13 @@ export default function PropertyPortfolio() {
               <h3 className="text-2xl font-bold text-foreground">All Properties</h3>
               <p className="text-muted-foreground">{properties.length} {properties.length === 1 ? 'property' : 'properties'}</p>
             </div>
-          </motion.div>
+          </div>
           
-          <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={propertiesInView ? "visible" : "hidden"}
-          >
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {properties.map((property) => {
               const occupancyRate = parseFloat(((property.occupiedSF / property.totalSF) * 100).toFixed(1));
               return (
-                <motion.div key={property.id} variants={scaleIn}>
+                <div key={property.id}>
                   <Card className="hover-elevate transition-all duration-300" data-testid={`card-property-${property.id}`}>
                     <CardHeader>
                       <div className="flex items-start justify-between">
@@ -487,10 +476,10 @@ export default function PropertyPortfolio() {
                       </div>
                     </CardContent>
                   </Card>
-                </motion.div>
+                </div>
               );
               })}
-          </motion.div>
+          </div>
         </div>
         
         {/* Empty state for no properties */}
