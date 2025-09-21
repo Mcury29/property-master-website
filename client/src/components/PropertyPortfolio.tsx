@@ -450,34 +450,6 @@ export default function PropertyPortfolio() {
                           )}
                         </div>
                         
-                        {/* Property Action Buttons */}
-                        <div className="mt-4 pt-3 border-t border-border/50 flex gap-2">
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className={`text-xs h-8 ${siteMapImages[property.name] ? 'flex-1' : 'w-full'}`}
-                            onClick={() => {
-                              // Handle connect to realtor action
-                              window.open(`mailto:reception@propertymasters.ca?subject=Inquiry about ${property.name}&body=Hi, I'm interested in learning more about the property at ${property.address}.`, '_blank');
-                            }}
-                            data-testid={`button-connect-realtor-${property.id}`}
-                          >
-                            <Phone className="w-3 h-3 mr-1" />
-                            Contact
-                          </Button>
-                          {siteMapImages[property.name] && (
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="flex-1 text-xs h-8"
-                              onClick={() => handleSiteMapClick(property)}
-                              data-testid={`button-view-sitemap-${property.id}`}
-                            >
-                              <FileText className="w-3 h-3 mr-1" />
-                              Site Map
-                            </Button>
-                          )}
-                        </div>
                       </div>
                     </CardContent>
                   </Card>
