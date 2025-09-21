@@ -9,42 +9,11 @@ import type { Property } from '@shared/schema';
 import { motion } from 'motion/react';
 import { useScrollAnimation, fadeInUp, staggerContainer, scaleIn, fadeInLeft } from '@/hooks/useScrollAnimation';
 
-// Import site map images
-import siteMap1 from '@assets/IMG_9605_1758412794644.jpeg';
-import siteMap2 from '@assets/IMG_9606_1758412794643.jpeg';
-import siteMap3 from '@assets/IMG_9607_1758412794643.jpeg';
-import siteMap4 from '@assets/IMG_9608_1758412794644.jpeg';
-import siteMap5 from '@assets/IMG_9609_1758412794644.jpeg';
-import siteMap6 from '@assets/IMG_9610_1758412794644.jpeg';
-import siteMap7 from '@assets/IMG_9611_1758412794643.jpeg';
-import siteMap8 from '@assets/IMG_9612_1758412794643.jpeg';
-import siteMap9 from '@assets/IMG_9613_1758412794643.jpeg';
-import siteMap10 from '@assets/IMG_9614_1758412794643.jpeg';
-import siteMap11 from '@assets/IMG_9615_1758412794643.jpeg';
-import siteMap12 from '@assets/IMG_9616_1758412794642.jpeg';
-import siteMap13 from '@assets/IMG_9617_1758412794642.jpeg';
-import siteMap14 from '@assets/IMG_9618_1758412794642.jpeg';
-import siteMap15 from '@assets/IMG_9619_1758412794642.jpeg';
-import siteMap16 from '@assets/IMG_9620_1758412794641.jpeg';
+// Site map images will be imported here as they are provided
 
-// Site map mapping based on property names
+// Site map mapping based on property names - will be populated as images are provided
 const siteMapImages: Record<string, string> = {
-  'Argyll Shopping Centre': siteMap1,
-  'Castledowns Shopping Centre': siteMap2,
-  'No Frills': siteMap3,
-  'Millwoods Mainstreet': siteMap4,
-  'Sherwood Park Plaza': siteMap5,
-  'Wainwright Crossing': siteMap6,
-  'Wild Rose Square': siteMap7,
-  'Broadmoor Baseline Crossing': siteMap8,
-  'Brentwood Building': siteMap9,
-  'Normed Professional Centre': siteMap10,
-  'Centre 34': siteMap11,
-  'Hans Professional Centre': siteMap12,
-  'AHS Project': siteMap13,
-  'Soper Building': siteMap14,
-  'Winnington Building': siteMap15,
-  'Natasha Manor': siteMap16,
+  // Mappings will be added here as images are provided with correct property names
 };
 
 // Calculate portfolio stats from real property data
