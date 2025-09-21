@@ -241,7 +241,6 @@ export default function PropertyPortfolio() {
 
   const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
   const { ref: statsRef, isInView: statsInView } = useScrollAnimation();
-  const { ref: propertiesRef, isInView: propertiesInView } = useScrollAnimation();
 
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat().format(num);
@@ -376,11 +375,10 @@ export default function PropertyPortfolio() {
 
         {/* All Properties in Single Grid */}
         <motion.div 
-          ref={propertiesRef}
           className="mb-16"
           variants={staggerContainer}
           initial="hidden"
-          animate={propertiesInView ? "visible" : "hidden"}
+          animate="visible"
         >
           <motion.div className="flex items-center gap-3 mb-6" variants={fadeInLeft}>
             <div className="bg-primary/10 p-2 rounded-lg">
