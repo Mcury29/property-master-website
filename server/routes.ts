@@ -142,7 +142,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const inquiry = await storage.createContactInquiry(inquiryData);
       
       // Send email notification to company
-      const companyEmail = "info@propertymasters.ca"; // Company notification email
+      const companyEmail = process.env.TO_EMAIL || "info@propertymasters.ca"; // Company notification email
       try {
         // Ensure all required fields have values for email template
         const emailData = {
