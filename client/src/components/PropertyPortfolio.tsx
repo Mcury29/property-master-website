@@ -375,14 +375,13 @@ export default function PropertyPortfolio() {
         </motion.div>
 
         {/* All Properties in Single Grid */}
-        <motion.div 
-          ref={propertiesRef}
-          className="mb-16"
-          variants={staggerContainer}
-          initial="hidden"
-          animate={propertiesInView ? "visible" : "hidden"}
-        >
-          <motion.div className="flex items-center gap-3 mb-6" variants={fadeInLeft}>
+        <div ref={propertiesRef} className="mb-16">
+          <motion.div 
+            className="flex items-center gap-3 mb-6" 
+            variants={fadeInLeft}
+            initial="hidden"
+            animate={propertiesInView ? "visible" : "hidden"}
+          >
             <div className="bg-primary/10 p-2 rounded-lg">
               <Building className="w-6 h-6 text-primary" />
             </div>
@@ -492,7 +491,7 @@ export default function PropertyPortfolio() {
               );
               })}
           </motion.div>
-        </motion.div>
+        </div>
         
         {/* Empty state for no properties */}
         {properties.length === 0 && (

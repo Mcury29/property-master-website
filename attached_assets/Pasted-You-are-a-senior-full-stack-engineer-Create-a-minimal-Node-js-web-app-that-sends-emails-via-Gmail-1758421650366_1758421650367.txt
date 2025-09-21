@@ -1,0 +1,193 @@
+You are a senior full-stack engineer. Create a minimal Node.js web app that sends emails via **Gmail SMTP (Nodemailer)** when a contact form is submitted.
+
+## Constraints / assumptions
+- The Replit Secrets are ALREADY set: SMTP_USER, SMTP_PASS, FROM_EMAIL, TO_EMAIL.
+- Keep it simple: Express server, Nodemailer transport using smtp.gmail.com, and a tiny static frontend.
+- Do not ask follow-up questions. Generate the project exactly as specified.
+
+## Deliverables
+Create these files with the exact contents below.
+
+### package.json
+{
+  "name": "form-to-email-gmail-smtp",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.13"
+  }
+}
+
+### server.js
+import express from "express";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+import nodemailer from "nodemailer";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+
+const {
+  SMTP_HOST = "smtp.gmail.com",
+  SMTP_PORT = "587",
+  SMTP_USER,
+  SMTP_PASS,
+  FROM_EMAIL,
+  TO_EMAIL
+} = process.env;
+
+if (!SMTP_USER || !SMTP_PASS || !FROM_EMAIL || !TO_EMAIL) {
+  console.warn("⚠️ Missing one or more required env vars: SMTP_USER, SMTP_PASS, FROM_EMAIL, TO_EMAIL.");
+}
+
+const transporter = nodemailer.createTransport({
+  host: SMTP_HOST,
+  port: Number(SMTP_PORT),
+  secure: Number(SMTP_PORT) === 465, // SSL if 465, otherwise STARTTLS
+  auth: { user: SMTP_USER, pass: SMTP_PASS }
+});
+
+app.get("/", (_req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+app.post("/api/contact", async (req, res) => {
+  try {
+    const { name, email, message } = req.body || {};
+    if (!name || !email || !message) {
+      return res.status(400).json({ ok: false, error: "Missing fields" });
+    }
+
+    const subject = `New website message from ${name}`;
+    const text = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+    const html = `
+      <div style="font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.5">
+        <h2>Website Form Submission</h2>
+        <p><b>Name:</b> ${escapeHtml(name)}</p>
+        <p><b>Email:</b> ${escapeHtml(email)}</p>
+        <p><b>Message:</b><br>${nl2br(escapeHtml(message))}</p>
+        <hr>
+        <small>Sent ${new Date().toISOString()}</small>
+      </div>
+    `;
+
+    await transporter.sendMail({
+      from: FROM_EMAIL,   // shown to recipient
+      to: TO_EMAIL,       // owner inbox
+      replyTo: email,     // reply goes to the submitter
+      subject,
+      text,
+      html
+    });
+
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("Email send error:", err);
+    res.status(500).json({ ok: false, error: "Failed to send" });
+  }
+});
+
+function escapeHtml(str = "") {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+function nl2br(str = "") {
+  return String(str).replace(/\n/g, "<br>");
+}
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+
+### public/index.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contact Form</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; padding: 24px; }
+      form { max-width: 520px; display: grid; gap: 12px; }
+      input, textarea, button { padding: 10px; font-size: 16px; }
+      button { cursor: pointer; }
+      .notice { margin-top: 8px; min-height: 1.5em; }
+    </style>
+  </head>
+  <body>
+    <h1>Contact</h1>
+    <form id="contactForm">
+      <input name="name" placeholder="Your name" required />
+      <input name="email" type="email" placeholder="Your email" required />
+      <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+      <button type="submit">Send</button>
+      <div id="status" class="notice" role="status" aria-live="polite"></div>
+    </form>
+
+    <script>
+      const form = document.getElementById("contactForm");
+      const statusEl = document.getElementById("status");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        statusEl.textContent = "Sending...";
+        const submitBtn = form.querySelector("button[type=submit]");
+        submitBtn.disabled = true;
+
+        const payload = Object.fromEntries(new FormData(form).entries());
+
+        try {
+          const res = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json();
+          if (data.ok) {
+            statusEl.textContent = "Sent! We'll get back to you soon.";
+            form.reset();
+          } else {
+            statusEl.textContent = "Error sending message. Please try again.";
+          }
+        } catch {
+          statusEl.textContent = "Network error. Please try again.";
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
+
+### README.md
+# Form → Email via Gmail SMTP (Nodemailer)
+
+## Secrets (already added per your note)
+- `SMTP_USER` = your Gmail address (e.g., yourname@gmail.com)
+- `SMTP_PASS` = your **Gmail App Password** (generated at https://myaccount.google.com/apppasswords)
+- `FROM_EMAIL` = e.g., `Website <yourname@gmail.com>`
+- `TO_EMAIL` = the company owner's inbox (e.g., owner@company.com)
+
+*(Optional overrides)*
+- `SMTP_HOST` = `smtp.gmail.com`
+- `SMTP_PORT` = `587` (use `465` for SSL if preferred)
+
+## Run
+```bash
+npm install
+npm start
