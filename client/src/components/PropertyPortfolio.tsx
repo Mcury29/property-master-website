@@ -23,6 +23,7 @@ import plaza127WarehouseSiteMap from '@assets/IMG_9614_1758414726907.jpeg';
 import sherwoodParkPlazaSiteMap from '@assets/IMG_9615_1758414872723.jpeg';
 import soperBuildingSiteMap from '@assets/IMG_9616_1758414977824.jpeg';
 import wainwrightCrossingSiteMap from '@assets/IMG_9617_1758415057119.jpeg';
+import winningtonBuildingSiteMap from '@assets/IMG_9618_1758415150170.jpeg';
 
 // Site map mapping based on property names - will be populated as images are provided
 const siteMapImages: Record<string, string> = {
@@ -39,6 +40,7 @@ const siteMapImages: Record<string, string> = {
   'Sherwood Park Plaza': sherwoodParkPlazaSiteMap,
   'Soper Building': soperBuildingSiteMap,
   'Wainwright Crossing': wainwrightCrossingSiteMap,
+  'Winnington Building': winningtonBuildingSiteMap,
 };
 
 // Calculate portfolio stats from real property data
