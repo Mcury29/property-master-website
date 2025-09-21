@@ -15,6 +15,7 @@ import brentwoodBuildingSiteMap from '@assets/IMG_9606_1758413808793.jpeg';
 import broadmoorBaselineSiteMap from '@assets/IMG_9607_1758413949907.jpeg';
 import castledownsShoppingSiteMap from '@assets/IMG_9608_1758414081820.jpeg';
 import centre34SiteMap from '@assets/IMG_9609_1758414163649.jpeg';
+import hansProfessionalSiteMap from '@assets/IMG_9610_1758414236364.jpeg';
 
 // Site map mapping based on property names - will be populated as images are provided
 const siteMapImages: Record<string, string> = {
@@ -23,6 +24,7 @@ const siteMapImages: Record<string, string> = {
   'Broadmoor Baseline Crossing': broadmoorBaselineSiteMap,
   'Castledowns Shopping Centre': castledownsShoppingSiteMap,
   'Centre 34': centre34SiteMap,
+  'Hans Professional Centre': hansProfessionalSiteMap,
 };
 
 // Calculate portfolio stats from real property data
