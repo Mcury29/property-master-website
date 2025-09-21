@@ -10,10 +10,11 @@ import { motion } from 'motion/react';
 import { useScrollAnimation, fadeInUp, staggerContainer, scaleIn, fadeInLeft } from '@/hooks/useScrollAnimation';
 
 // Site map images will be imported here as they are provided
+import argyllShoppingSiteMap from '@assets/IMG_9605_1758413681982.jpeg';
 
 // Site map mapping based on property names - will be populated as images are provided
 const siteMapImages: Record<string, string> = {
-  // Mappings will be added here as images are provided with correct property names
+  'Argyll Shopping Centre': argyllShoppingSiteMap,
 };
 
 // Calculate portfolio stats from real property data
