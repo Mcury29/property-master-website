@@ -13,12 +13,14 @@ import { useScrollAnimation, fadeInUp, staggerContainer, scaleIn, fadeInLeft } f
 import argyllShoppingSiteMap from '@assets/IMG_9605_1758413681982.jpeg';
 import brentwoodBuildingSiteMap from '@assets/IMG_9606_1758413808793.jpeg';
 import broadmoorBaselineSiteMap from '@assets/IMG_9607_1758413949907.jpeg';
+import castledownsShoppingSiteMap from '@assets/IMG_9608_1758414081820.jpeg';
 
 // Site map mapping based on property names - will be populated as images are provided
 const siteMapImages: Record<string, string> = {
   'Argyll Shopping Centre': argyllShoppingSiteMap,
   'Brentwood Building': brentwoodBuildingSiteMap,
   'Broadmoor Baseline Crossing': broadmoorBaselineSiteMap,
+  'Castledowns Shopping Centre': castledownsShoppingSiteMap,
 };
 
 // Calculate portfolio stats from real property data
