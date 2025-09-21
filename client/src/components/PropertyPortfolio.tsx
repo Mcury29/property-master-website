@@ -17,6 +17,7 @@ import castledownsShoppingSiteMap from '@assets/IMG_9608_1758414081820.jpeg';
 import centre34SiteMap from '@assets/IMG_9609_1758414163649.jpeg';
 import hansProfessionalSiteMap from '@assets/IMG_9610_1758414236364.jpeg';
 import hintonLandSiteMap from '@assets/IMG_9611_1758414360649.jpeg';
+import millwoodsMainstreetSiteMap from '@assets/IMG_9612_1758414508315.jpeg';
 
 // Site map mapping based on property names - will be populated as images are provided
 const siteMapImages: Record<string, string> = {
@@ -27,6 +28,7 @@ const siteMapImages: Record<string, string> = {
   'Centre 34': centre34SiteMap,
   'Hans Professional Centre': hansProfessionalSiteMap,
   'Hinton Land': hintonLandSiteMap,
+  'Millwoods Mainstreet': millwoodsMainstreetSiteMap,
 };
 
 // Calculate portfolio stats from real property data
