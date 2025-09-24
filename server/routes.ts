@@ -169,7 +169,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form endpoint for external API compatibility
   app.post("/api/contact", async (req, res) => {
     try {
-      const { name, email, phone, subject, message } = req.body;
+      const { name, email, phone, message, subject } = req.body;
       
       // Basic validation
       if (!name || !email || !message) {
@@ -185,7 +185,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         email: email.trim(),
         phone: phone ? phone.trim() : null,
         message: message.trim(),
-        inquiryType: 'general'
+        inquiryType: 'general',
+        subject: subject ? subject.trim() : null
       };
 
       // Store the inquiry (without consent field since it's external)
