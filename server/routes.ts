@@ -166,6 +166,55 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Contact form endpoint for external API compatibility
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const { name, email, phone, subject, message } = req.body;
+      
+      // Basic validation
+      if (!name || !email || !message) {
+        return res.status(400).json({ 
+          ok: false, 
+          error: "Missing required fields: name, email, and message are required" 
+        });
+      }
+
+      // Create contact inquiry data
+      const inquiryData = {
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone ? phone.trim() : null,
+        message: message.trim(),
+        inquiryType: 'general'
+      };
+
+      // Store the inquiry (without consent field since it's external)
+      const inquiry = await storage.createContactInquiry(inquiryData);
+      
+      // Send email notification to company
+      const companyEmail = process.env.TO_EMAIL || "reception@propertymasters.ca";
+      try {
+        await sendContactInquiryNotification(inquiryData, companyEmail);
+        console.log(`Contact form notification sent to ${companyEmail}`);
+      } catch (emailError) {
+        console.error("Failed to send email notification:", emailError);
+        // Continue execution - don't fail the request if email fails
+      }
+      
+      res.json({ 
+        ok: true, 
+        message: "Contact inquiry submitted successfully",
+        id: inquiry.id 
+      });
+    } catch (error) {
+      console.error("Error processing contact form:", error);
+      res.status(500).json({ 
+        ok: false, 
+        error: "Failed to submit contact inquiry" 
+      });
+    }
+  });
+
   /*
   // PUT /api/contact-inquiries/:id/status - Update contact inquiry status (admin route)
   app.put("/api/contact-inquiries/:id/status", async (req, res) => {
