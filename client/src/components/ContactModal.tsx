@@ -13,10 +13,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
-import { useMutation } from '@tanstack/react-query';
-import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import type { InsertContactInquiry } from '@shared/schema';
 
 interface ContactModalProps {
   open: boolean;
@@ -34,42 +31,7 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
     consent: false
   });
 
-  const submitContactMutation = useMutation({
-    mutationFn: async (data: InsertContactInquiry) => {
-      try {
-        const response = await apiRequest('POST', '/api/contact-inquiries', data);
-        const result = await response.json();
-        return result;
-      } catch (error) {
-        console.error('Contact form submission failed');
-        throw error;
-      }
-    },
-    onSuccess: () => {
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your inquiry. We'll get back to you within 24 hours."
-      });
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
-        inquiryType: 'general',
-        consent: false
-      });
-      onOpenChange(false);
-    },
-    onError: (error: any) => {
-      console.error('Contact form submission error');
-      toast({
-        title: "Error",
-        description: error?.message || "Failed to send message. Please try again.",
-        variant: "destructive"
-      });
-    }
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -87,14 +49,47 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
       return;
     }
 
-    submitContactMutation.mutate({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone || null,
-      message: formData.message,
-      inquiryType: formData.inquiryType,
-      consent: formData.consent
-    });
+    setIsSubmitting(true);
+    
+    // Submit to FormSubmit service
+    const form = e.target as HTMLFormElement;
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for your inquiry. We'll get back to you within 24 hours."
+        });
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+          inquiryType: 'general',
+          consent: false
+        });
+        onOpenChange(false);
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Contact form submission error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -158,12 +153,18 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
 
           {/* Contact Form */}
           <div>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form action="https://formsubmit.co/info@propertymasters.ca" method="POST" onSubmit={handleSubmit} className="space-y-4">
+              {/* FormSubmit configuration */}
+              <input type="hidden" name="_subject" value="New Contact Inquiry - Property Masters (Modal)" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="inquiry_type" value={formData.inquiryType} />
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="modal-name">Full Name *</Label>
                   <Input
                     id="modal-name"
+                    name="name"
                     type="text"
                     placeholder="Your full name"
                     required
@@ -176,6 +177,7 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
                   <Label htmlFor="modal-email">Email Address *</Label>
                   <Input
                     id="modal-email"
+                    name="email"
                     type="email"
                     placeholder="your.email@example.com"
                     required
@@ -190,6 +192,7 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
                 <Label htmlFor="modal-phone">Phone Number</Label>
                 <Input
                   id="modal-phone"
+                  name="phone"
                   type="tel"
                   placeholder="(780) 123-4567"
                   value={formData.phone}
@@ -202,6 +205,7 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
                 <Label htmlFor="modal-message">Message *</Label>
                 <Textarea
                   id="modal-message"
+                  name="message"
                   placeholder="Tell us about your property needs, maintenance requirements, or any questions you have..."
                   className="min-h-[100px]"
                   required
@@ -226,10 +230,10 @@ export default function ContactModal({ open, onOpenChange }: ContactModalProps) 
               <Button 
                 type="submit" 
                 className="w-full"
-                disabled={!formData.consent || submitContactMutation.isPending}
+                disabled={!formData.consent || isSubmitting}
                 data-testid="button-modal-submit-contact"
               >
-                {submitContactMutation.isPending ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
             </form>
           </div>
