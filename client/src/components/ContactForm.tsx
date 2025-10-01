@@ -33,18 +33,19 @@ export default function ContactForm() {
       try {
         const response = await apiRequest('POST', '/api/contact-inquiries', data);
         const result = await response.json();
+        console.log('Server response:', result);
         return result;
       } catch (error) {
-        console.error('Contact form submission failed');
+        console.error('Contact form submission failed:', error);
         throw error;
       }
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log('Form submitted successfully:', data);
       toast({
         title: "Message sent!",
         description: "Thank you for your inquiry. We'll get back to you within 24 hours."
       });
-      // Reset form
       setFormData({
         name: '',
         email: '',
@@ -55,7 +56,7 @@ export default function ContactForm() {
       });
     },
     onError: (error: any) => {
-      console.error('Contact form submission error');
+      console.error('Contact form submission error:', error);
       toast({
         title: "Error",
         description: error?.message || "Failed to send message. Please try again.",
