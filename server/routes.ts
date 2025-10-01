@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertPropertySchema, insertContactInquirySchema } from "@shared/schema";
+import { sendContactEmail } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Property routes
@@ -131,7 +132,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       // Validate full schema including consent requirement
       const validationResult = insertContactInquirySchema.safeParse(req.body);
-      
+
       if (!validationResult.success) {
         return res.status(400).json({ error: "Validation failed", details: validationResult.error.flatten().fieldErrors });
       }
@@ -139,6 +140,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Extract consent and pass the rest to storage (consent is not persisted)
       const { consent, ...inquiryData } = validationResult.data;
       const inquiry = await storage.createContactInquiry(inquiryData);
+
+      // Send email notification
+      try {
+        await sendContactEmail({
+          fullName: inquiryData.name,
+          email: inquiryData.email,
+          phone: inquiryData.phone || undefined,
+          message: inquiryData.message,
+        });
+      } catch (emailError) {
+        console.error("Failed to send email notification:", emailError);
+      }
 
       res.status(201).json({ message: "Contact inquiry submitted successfully", id: inquiry.id });
     } catch (error) {
