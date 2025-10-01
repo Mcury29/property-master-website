@@ -23,7 +23,6 @@ export const contactInquiries = pgTable("contact_inquiries", {
   name: text("name").notNull(),
   email: text("email").notNull(),
   phone: text("phone"),
-  subject: text("subject"),
   message: text("message").notNull(),
   inquiryType: varchar("inquiry_type", { length: 50 }).notNull().default("general"), // quote, meeting, general
   status: varchar("status", { length: 20 }).notNull().default("pending"), // pending, contacted, closed

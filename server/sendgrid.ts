@@ -118,13 +118,10 @@ export async function sendContactInquiryNotification(
     phone?: string | null;
     message: string;
     inquiryType: string;
-    subject?: string | null;
   },
   toEmail: string
 ): Promise<boolean> {
-  const emailSubject = inquiryData.subject 
-    ? `${inquiryData.subject} - from ${inquiryData.name}`
-    : `New Contact Inquiry from ${inquiryData.name}`;
+  const subject = `New Contact Inquiry from ${inquiryData.name}`;
   
   const text = `
 New contact inquiry received:
@@ -132,7 +129,6 @@ New contact inquiry received:
 Name: ${inquiryData.name}
 Email: ${inquiryData.email}
 Phone: ${inquiryData.phone || 'Not provided'}
-Subject: ${inquiryData.subject || 'Not provided'}
 Inquiry Type: ${inquiryData.inquiryType}
 
 Message:
@@ -145,7 +141,6 @@ ${inquiryData.message}
       <p><strong>Name:</strong> ${escapeHtml(inquiryData.name)}</p>
       <p><strong>Email:</strong> <a href="mailto:${inquiryData.email}">${escapeHtml(inquiryData.email)}</a></p>
       <p><strong>Phone:</strong> ${escapeHtml(inquiryData.phone || 'Not provided')}</p>
-      <p><strong>Subject:</strong> ${escapeHtml(inquiryData.subject || 'Not provided')}</p>
       <p><strong>Inquiry Type:</strong> ${escapeHtml(inquiryData.inquiryType)}</p>
       <p><strong>Message:</strong><br>${nl2br(escapeHtml(inquiryData.message))}</p>
       <hr>
@@ -156,7 +151,7 @@ ${inquiryData.message}
   return sendEmail({
     to: toEmail,
     from: inquiryData.email, // Reply-to will be the inquirer
-    subject: emailSubject,
+    subject,
     text,
     html
   });
