@@ -26,6 +26,15 @@ export async function sendContactEmail(data: EmailData): Promise<boolean> {
   const smtpFrom = process.env.SMTP_FROM;
   const smtpTo = process.env.SMTP_TO;
 
+  console.log('SMTP Configuration:', {
+    host: smtpHost || '(missing)',
+    port: smtpPort || '(missing)',
+    user: smtpUser || '(missing)',
+    pass: smtpPass ? '***configured***' : '(missing)',
+    from: smtpFrom || '(missing)',
+    to: smtpTo || '(missing)'
+  });
+
   if (!smtpHost || !smtpPort || !smtpUser || !smtpPass || !smtpFrom || !smtpTo) {
     console.error('Missing SMTP configuration. Required: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM, SMTP_TO');
     throw new Error('Email service not configured');
